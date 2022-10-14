@@ -22,10 +22,11 @@ module.exports = {
       named: 'never',
       asyncArrow: 'always'
     }],
-    'arrow-parens': ['error', 'always']
+    'arrow-parens': ['error', 'always'],
+    'no-unused-vars': 1
   },
-  global: {
-    describe: 1,
-    test: 1
+  globals: {
+    describe: 'readonly',
+    test: 'readonly'
   }
 }
