@@ -23,5 +23,9 @@ module.exports = {
       asyncArrow: 'always'
     }],
     'arrow-parens': ['error', 'always']
+  },
+  global: {
+    describe: 1,
+    test: 1
   }
 }
