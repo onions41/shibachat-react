@@ -1,16 +1,20 @@
 import {
   ApolloClient,
   InMemoryCache,
-  HttpLink,
-} from '@apollo/client';
+  from
+} from '@apollo/client'
 
-// Apollo HTTP Link
-const httpLink = new HttpLink({ uri: process.env.REACT_APP_GRAPHQL_SERVER_URL });
+import httpLink from './links/httpLink'
+
+// Combines some of the links
+const additiveLink = from([
+  httpLink
+])
 
 // Creates client out of links
 const apolloClient = new ApolloClient({
-  link: httpLink,
-  cache: new InMemoryCache(),
-});
+  link: additiveLink,
+  cache: new InMemoryCache()
+})
 
-export default apolloClient;
+export default apolloClient
