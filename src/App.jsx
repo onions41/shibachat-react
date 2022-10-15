@@ -1,20 +1,12 @@
-import React, { useState } from 'react'
-import { ApolloProvider } from '@apollo/client'
-import apolloClient from './graphql/apolloClient'
-import { Container, Input, Button } from '@mui/material'
+import React from 'react'
+import Routes from './routes'
 
 function App() {
-  const [value, setValue] = useState('')
-
+  // TODO: Add code for initial App mounting authentication
+  // All state must be held below this level.
+  // Ie, I don't want App component and the components above to re-render too often
   return (
-    <ApolloProvider client={apolloClient}>
-      <Container>
-        <Input value={value} onChange={ (e) => setValue(e.target.value) } />
-        <Button>
-          Press Me!
-        </Button>
-      </Container>
-    </ApolloProvider>
+    <Routes />
   )
 }
 
