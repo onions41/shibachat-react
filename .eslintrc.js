@@ -23,7 +23,8 @@ module.exports = {
       asyncArrow: 'always'
     }],
     'arrow-parens': ['error', 'always'],
-    'no-unused-vars': 1
+    'no-unused-vars': 1,
+    'react/prop-types': 0
   },
   globals: {
     describe: 'readonly',
