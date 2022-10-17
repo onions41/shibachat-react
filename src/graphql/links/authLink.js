@@ -8,7 +8,7 @@ const authLink = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers }) => (
     {
       headers: {
-        authorization: getAccessToken(),
+        'access-token': getAccessToken(),
         ...headers
       }
     }
