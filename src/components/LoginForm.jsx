@@ -103,6 +103,8 @@ export default function LoginForm({ handleLogin }) {
             handleSubmit,
             resetForm,
             errors,
+            handleBlur,
+            isSubmitting,
             touched
           }) => {
             return (
@@ -118,6 +120,7 @@ export default function LoginForm({ handleLogin }) {
                       autoComplete="nickname"
                       value={values.nickname}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                     {
                       errors?.nickname && touched.nickname
@@ -136,6 +139,7 @@ export default function LoginForm({ handleLogin }) {
                       autoComplete="password"
                       value={values.password}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                     {
                       errors?.password && touched.password
@@ -159,6 +163,7 @@ export default function LoginForm({ handleLogin }) {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                   onMouseUp={handleSubmit}
+                  disabled={isSubmitting}
                 >
                   Login
                 </Button>
@@ -169,6 +174,7 @@ export default function LoginForm({ handleLogin }) {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                   onMouseUp={() => { resetForm(); loginReset() }}
+                  disabled={isSubmitting}
                 >
                   Clear
                 </Button>
