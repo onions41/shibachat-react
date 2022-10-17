@@ -24,7 +24,8 @@ module.exports = {
     }],
     'arrow-parens': ['error', 'always'],
     'no-unused-vars': 1,
-    'react/prop-types': 0
+    'react/prop-types': 0,
+    'no-console': 1
   },
   globals: {
     describe: 'readonly',
