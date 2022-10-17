@@ -5,9 +5,11 @@ import {
 } from '@apollo/client'
 
 import httpLink from './links/httpLink'
+import authLink from './links/authLink'
 
 // Combines some of the links
 const additiveLink = from([
+  authLink,
   httpLink
 ])
 
