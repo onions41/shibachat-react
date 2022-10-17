@@ -43,8 +43,9 @@ const LoginSchema = Yup.object().shape({
 
 export default function LoginForm({ handleLogin }) {
   /**
-   * GraphQL Hook
+   * GraphQL Hooks
    */
+  // Login mutation
   const [login, {
     data: loginData, loading: loginLoading, error: loginError, reset: loginReset
   }] = useMutation(LOGIN)
@@ -58,9 +59,10 @@ export default function LoginForm({ handleLogin }) {
       const { data } = await login({ variables: values })
       // There was no error in the above line, which means login was successful.
       // So, response.data exists
-      setAccessToken(data.accessToken)
+      setAccessToken(data.login.accessToken)
 
-      // Wait an instant and handleLogin, thereby closing the modal.
+      // Wait an instant and handleLogin,
+      // which closes the modal by changing the isLoginState
       setTimeout(handleLogin, 600)
     } catch {
       // There should be nothing here. I am intentionally supressing the error
@@ -169,13 +171,6 @@ export default function LoginForm({ handleLogin }) {
                   onMouseUp={() => { resetForm(); loginReset() }}
                 >
                   Clear
-                </Button>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Send test query
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>
