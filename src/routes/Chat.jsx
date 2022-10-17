@@ -3,17 +3,15 @@ import React, {
   useState
 } from 'react'
 import { Container, Input, Button } from '@mui/material'
-import { useQuery } from '@apollo/client'
 
 // Internal imports
-import EXAMPLE1 from '../graphql/queries/example'
+import LoginModal from '../components/LoginModal'
 
 export default function Chat() {
   const [value, setValue] = useState('')
-
-  const { data, loading, error } = useQuery(EXAMPLE1)
-
-  console.table(data, loading, error)
+  // This needs to be hoisted to Redux later
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const handleLogin = () => setIsLoggedIn(true)
 
   return (
     <Container>
@@ -21,6 +19,7 @@ export default function Chat() {
       <Button>
         Press Me!
       </Button>
+      <LoginModal isOpen={!isLoggedIn} handleLogin={handleLogin} />
     </Container>
   )
 }
