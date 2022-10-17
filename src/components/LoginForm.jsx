@@ -25,7 +25,7 @@ import * as Yup from 'yup'
 // Internal imports
 import Copyright from './Copyright'
 import LOGIN from '../graphql/mutations/Login'
-import { setAccessToken } from '../isLoggedIn'
+import { setAccessToken } from '../accessToken'
 
 // For form level validation with Yup and Formik
 const LoginSchema = Yup.object().shape({
