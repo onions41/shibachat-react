@@ -6,9 +6,11 @@ import {
 
 import httpLink from './links/httpLink'
 import authLink from './links/authLink'
+import tokenRefreshLink from './links/tokenRefreshLink'
 
 // Combines some of the links
 const additiveLink = from([
+  tokenRefreshLink,
   authLink,
   httpLink
 ])
