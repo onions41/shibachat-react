@@ -9,6 +9,7 @@ import {
 // Routes
 import Home from './Home'
 import Register from './Register'
+import DevBar from '../components/DevBar'
 
 export default function Router() {
   return (
@@ -27,6 +28,7 @@ export default function Router() {
           }
         /> */}
       </Routes>
+      <DevBar />
     </BrowserRouter>
   )
 }

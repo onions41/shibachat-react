@@ -5,21 +5,25 @@ import styled from 'styled-components'
 
 // Internal imports
 import LoginForm from './LoginForm'
+import DevBar from './DevBar'
 
 // Defines the size and position of its parent Modal
 // Wraps the children of the model
 const ModalDiv = styled.div`
-  width: min(530px, 100vw);
+  width: min(500px, 100%);
   margin: auto;
   margin-top: 40px;
-  padding: 15px 0 15px; 
+  background-color: #9ec2cd;
+  border: 2px solid #367b90;
+  position: relative;
 `
 
 export default function LoginModal({ isOpen, handleLogin }) {
   return (
-    <Modal open={isOpen} >
+    <Modal open={isOpen}>
       <ModalDiv>
         <LoginForm handleLogin={handleLogin} />
+        <DevBar />
       </ModalDiv>
     </Modal>
   )
