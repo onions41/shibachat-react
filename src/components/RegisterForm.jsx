@@ -45,7 +45,7 @@ export default function RegisterForm() {
   // loading is not used as it is redundent to Formik's isSubmitting
   const [register, {
     error: gqlError, reset
-  }] = useMutation(REGISTER)
+  }] = useMutation(REGISTER, { fetchPolicy: 'network-only' })
 
   // Redux
   const dispatch = useDispatch()

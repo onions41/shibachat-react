@@ -28,9 +28,7 @@ import LOGIN from '../graphql/mutations/Login'
 import { loginAction } from '../store'
 
 const FormContainer = styled.div`
-  width: min(500px, 100%);
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +40,7 @@ export default function LoginForm() {
   // loading is not used as it is redundent to Formik's isSubmitting
   const [login, {
     error: gqlError, reset
-  }] = useMutation(LOGIN)
+  }] = useMutation(LOGIN, { fetchPolicy: 'network-only' })
 
   // Redux
   const dispatch = useDispatch()
@@ -172,7 +170,12 @@ export default function LoginForm() {
                 Don&apos;t have an account? Register!
               </Link>
               {/* GQL Error message */}
-              <Typography>
+              <Typography
+                sx={{
+                  marginTop: 2,
+                  marginBottom: 8
+                }}
+              >
                 {`gqlErrors: ${gqlError}`}
               </Typography>
             </FormContainer>
