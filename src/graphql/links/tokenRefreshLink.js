@@ -3,7 +3,8 @@ import { TokenRefreshLink } from 'apollo-link-token-refresh'
 import jwtDecode from 'jwt-decode'
 
 // Internal imports
-import { getAccessToken, setAccessToken } from '../../accessToken'
+import { getAccessToken } from '../../accessToken'
+import store, { loginAction, logoutAction } from '../../store'
 
 const tokenRefreshLink = new TokenRefreshLink({
   accessTokenField: 'accessToken',
@@ -32,11 +33,15 @@ const tokenRefreshLink = new TokenRefreshLink({
     })
   },
   handleFetch: (newAccessToken) => {
-    setAccessToken(newAccessToken)
+    // newAccessToken will be '' if refresh token was invalid or null
+    // and if it is '' that will throw on error and goes to handleError below
+    console.log('***TokenRefreshLink fetched new tokens')
+    store.dispatch(loginAction(newAccessToken))
   },
-  handleError: (err) => {
-    console.warn('Your refresh token is invalid. Try to relogin')
-    console.error(err)
+  handleError: (error) => {
+    // error thrown in fetchAccessToken
+    console.warn('***TokenRefreshLink could not fetch new tokens', error)
+    store.dispatch(logoutAction())
   }
 })
 
