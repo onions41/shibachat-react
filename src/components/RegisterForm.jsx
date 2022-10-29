@@ -1,31 +1,34 @@
 // Module imports
 import React, {
-  useCallback,
-  useState
+  useState,
+  useCallback
 } from 'react'
-import { useMutation } from '@apollo/client'
 import { Formik } from 'formik'
+import styled from 'styled-components'
 import {
-  Button,
   TextField,
-  Link,
-  Typography,
   InputAdornment,
-  IconButton
+  IconButton,
+  Button,
+  Link,
+  Typography
 } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
 import {
   VisibilityOff,
   Visibility,
   Send as SendIcon
 } from '@mui/icons-material'
-import styled from 'styled-components'
-import { useDispatch } from 'react-redux'
 import authInput from '../inputValidation/authInput'
+import REGISTER from '../graphql/mutations/Register'
+import { useMutation } from '@apollo/client'
+import { useDispatch, useSelector } from 'react-redux'
 
 // Internal imports
-import LOGIN from '../graphql/mutations/Login'
-import { loginAction } from '../store'
+import {
+  loginAction,
+  logoutAction,
+  selectIsLoggedIn
+} from '../store'
 
 const FormContainer = styled.div`
   width: min(500px, 100%);
@@ -36,31 +39,33 @@ const FormContainer = styled.div`
   align-items: center;
 `
 
-export default function LoginForm() {
-  // Login mutation hook
+export default function RegisterForm() {
+  // Register mutation hook
   // data is used inside onSubmit
   // loading is not used as it is redundent to Formik's isSubmitting
-  const [login, {
+  const [register, {
     error: gqlError, reset
-  }] = useMutation(LOGIN)
+  }] = useMutation(REGISTER)
 
   // Redux
   const dispatch = useDispatch()
+  const isLoggedIn = useSelector(selectIsLoggedIn)
 
-  // The mutation results returned the mutation function is used like this
-  // instead of trying to useEffect to save the access token because
-  // this is the best way of making sure that the code to store the
-  // Access token is used once and only once per click of the login button.
+  // Form submissions callback
   const onSubmit = useCallback(async (values) => {
     try {
-      const { data } = await login({ variables: values })
-      // There was no error in the above line, which means login was successful.
-      // So, response.data exists
-      dispatch(loginAction(data.login))
-      reset()
+      const { data } = await register({ variables: values })
+      // There was no error in the above line, which means mutation was successful.
+      // So, data exists
+      dispatch(loginAction(data.register))
+      reset() // Clear the mutation data
+      window.history.back() // Navigate back to the secured route from which the user came
+
+      // No need to call setSubmitting(false)
+      // as automatically done by Formik when an async onSubmit is used
     } catch {
       // There should be nothing here. I am intentionally supressing the error
-      // because the error that would be caught here is the same as loginError.
+      // because the error that would be caught here is the same as gqlError.
     }
   }, [])
 
@@ -91,13 +96,12 @@ export default function LoginForm() {
               <TextField
                 id="nickname-input"
                 name="nickname"
-                label="Nickname"
+                label="Choose a nickname"
                 helperText={
                   errors?.nickname && touched.nickname &&
                   errors.nickname
                 }
                 type="text"
-                autoComplete="nickname"
                 variant="filled"
                 fullWidth
                 value={values.nickname}
@@ -114,7 +118,7 @@ export default function LoginForm() {
               <TextField
                 id="password-input"
                 name="password"
-                label="Password"
+                label="Set a password"
                 helperText={
                   errors?.password && touched.password &&
                   errors.password
@@ -157,21 +161,20 @@ export default function LoginForm() {
                   marginBottom: 2
                 }}
               >
-                Login
+                Register
               </Button>
-              {/* Link to /register */}
+              {/* GQL Error message */}
               <Link
-                component={RouterLink}
-                to="/register"
+                onClick={() => window.history.back()}
                 disabled={isSubmitting}
                 sx={{
                   marginTop: 4,
                   marginBottom: 2
                 }}
               >
-                Don&apos;t have an account? Register!
+                Already registered? Go back!
               </Link>
-              {/* GQL Error message */}
+              {/* Go back link */}
               <Typography>
                 {`gqlErrors: ${gqlError}`}
               </Typography>
