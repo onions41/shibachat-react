@@ -2,20 +2,14 @@
 import React from 'react'
 import { Container, Button } from '@mui/material'
 import { useLazyQuery } from '@apollo/client'
-import { useSelector } from 'react-redux'
 
 // Internal imports
-import LoginModal from '../components/LoginModal'
 import { PROTECTED, UNPROTECTED } from '../graphql/queries/testQueries'
-import { selectIsLoggedIn } from '../store'
 
-export default function Home() {
+export default function Chat() {
   // Test queries
   const [protectedQuery] = useLazyQuery(PROTECTED, { fetchPolicy: 'network-only' })
   const [unprotectedQuery] = useLazyQuery(UNPROTECTED, { fetchPolicy: 'network-only' })
-
-  // Redux
-  const isLoggedIn = useSelector(selectIsLoggedIn)
 
   return (
     <Container>
@@ -35,8 +29,6 @@ export default function Home() {
       >
         Unprotected
       </Button>
-      {/* need to get from redux */}
-      <LoginModal isOpen={!isLoggedIn} />
     </Container>
   )
 }

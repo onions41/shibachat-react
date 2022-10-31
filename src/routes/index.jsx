@@ -7,15 +7,24 @@ import {
 } from 'react-router-dom'
 
 // Routes
-import Home from './Home'
+import Chat from './Chat'
+import Login from './Login'
 import Register from './Register'
+
+// Route wrappers
+import RequiresAuth from '../components/RequiresAuth'
+import UserControls from '../components/UserControls'
+
 import DevBar from '../components/DevBar'
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+          <RequiresAuth><UserControls><Chat /></UserControls></RequiresAuth>
+        } />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         {/* <Route path="/teams" element={<RequiresAuth><ViewTeams /></RequiresAuth>} />
         <Route path="/teams/:teamId" element={<RequiresAuth><ViewTeams /></RequiresAuth>} />
