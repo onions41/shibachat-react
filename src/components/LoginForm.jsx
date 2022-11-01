@@ -13,25 +13,30 @@ import {
   InputAdornment,
   IconButton
 } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import {
+  Link as RouterLink,
+  Navigate
+} from 'react-router-dom'
 import {
   VisibilityOff,
   Visibility,
   Send as SendIcon
 } from '@mui/icons-material'
 import styled from 'styled-components'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import authInput from '../inputValidation/authInput'
 
 // Internal imports
 import LOGIN from '../graphql/mutations/Login'
-import { loginAction } from '../store'
+import { loginAction, selectIsLoggedIn } from '../store'
 
 const FormContainer = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+width: min(400px, 100%);
+padding-left: 10px;
+padding-right: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
 `
 
 export default function LoginForm() {
@@ -44,6 +49,7 @@ export default function LoginForm() {
 
   // Redux
   const dispatch = useDispatch()
+  const isLoggedIn = useSelector(selectIsLoggedIn)
 
   // The mutation results returned the mutation function is used like this
   // instead of trying to useEffect to save the access token because
@@ -56,11 +62,16 @@ export default function LoginForm() {
       // So, response.data exists
       dispatch(loginAction(data.login))
       reset()
+
+      // No need to call setSubmitting(false)
+      // as automatically done by Formik when an async onSubmit is used
     } catch {
       // There should be nothing here. I am intentionally supressing the error
       // because the error that would be caught here is the same as loginError.
     }
   }, [])
+
+  if (isLoggedIn) { return <Navigate to="/" replace /> }
 
   return (
     <Formik
@@ -69,6 +80,8 @@ export default function LoginForm() {
         password: ''
       }}
       validationSchema={authInput}
+      validateOnBlur={false}
+      validateOnChange={false}
       onSubmit={onSubmit}
     >
       {
@@ -170,12 +183,7 @@ export default function LoginForm() {
                 Don&apos;t have an account? Register!
               </Link>
               {/* GQL Error message */}
-              <Typography
-                sx={{
-                  marginTop: 2,
-                  marginBottom: 8
-                }}
-              >
+              <Typography>
                 {`gqlErrors: ${gqlError}`}
               </Typography>
             </FormContainer>

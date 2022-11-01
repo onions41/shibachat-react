@@ -18,20 +18,20 @@ import {
   Visibility,
   Send as SendIcon
 } from '@mui/icons-material'
-import authInput from '../inputValidation/authInput'
-import REGISTER from '../graphql/mutations/Register'
 import { useMutation } from '@apollo/client'
 import { useDispatch, useSelector } from 'react-redux'
+import {
+  Link as RouterLink,
+  Navigate
+} from 'react-router-dom'
 
 // Internal imports
-import {
-  loginAction,
-  logoutAction,
-  selectIsLoggedIn
-} from '../store'
+import { loginAction, selectIsLoggedIn } from '../store'
+import authInput from '../inputValidation/authInput'
+import REGISTER from '../graphql/mutations/Register'
 
 const FormContainer = styled.div`
-  width: min(500px, 100%);
+  width: min(400px, 100%);
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
@@ -59,7 +59,6 @@ export default function RegisterForm() {
       // So, data exists
       dispatch(loginAction(data.register))
       reset() // Clear the mutation data
-      window.history.back() // Navigate back to the secured route from which the user came
 
       // No need to call setSubmitting(false)
       // as automatically done by Formik when an async onSubmit is used
@@ -69,6 +68,8 @@ export default function RegisterForm() {
     }
   }, [])
 
+  if (isLoggedIn) { return <Navigate to="/" replace /> }
+
   return (
     <Formik
       initialValues={{
@@ -76,6 +77,8 @@ export default function RegisterForm() {
         password: ''
       }}
       validationSchema={authInput}
+      validateOnBlur={false}
+      validateOnChange={false}
       onSubmit={onSubmit}
     >
       {
@@ -163,18 +166,19 @@ export default function RegisterForm() {
               >
                 Register
               </Button>
-              {/* GQL Error message */}
+              {/* Go back link */}
               <Link
-                onClick={() => window.history.back()}
+                component={RouterLink}
+                to="/login"
                 disabled={isSubmitting}
                 sx={{
                   marginTop: 4,
                   marginBottom: 2
                 }}
               >
-                Already registered? Go back!
+                Already registered? Login!
               </Link>
-              {/* Go back link */}
+              {/* GQL Error message */}
               <Typography>
                 {`gqlErrors: ${gqlError}`}
               </Typography>
