@@ -17,8 +17,6 @@ const DevBarContainer = styled.div`
   height: 50px;
   color: #77bc65;
   background-color: #23353b;
-  position: absolute;
-  bottom: 0;
   display:flex;
   justify-content: space-around;
   align-items: center;
