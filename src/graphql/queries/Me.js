@@ -5,7 +5,7 @@ export default gql`
     user {
       id
       nickname
-      receivedFriendRequests {
+      receivedFRequests {
         id
         nickname
       }

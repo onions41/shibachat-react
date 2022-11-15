@@ -47,7 +47,7 @@ export default function NavDrawer() {
     return <div style={{ width: drawerWidth }}>Me query threw an error</div>
   } // data was fetched successfully
 
-  const { user: { receivedFriendRequests } } = meData
+  const { user: { receivedFRequests } } = meData
 
   return (
     <Drawer
@@ -67,7 +67,7 @@ export default function NavDrawer() {
 
       <Divider />
 
-      <FriendRequestsList requests={receivedFriendRequests} />
+      <FriendRequestsList requests={receivedFRequests} />
     </Drawer>
   )
 }
