@@ -1,34 +1,37 @@
 // Module imports
 import React from 'react'
-import { Container, Button } from '@mui/material'
-import { useLazyQuery } from '@apollo/client'
+import { Container } from '@mui/material'
+import { useQuery, useMutation } from '@apollo/client'
 
 // Internal imports
-import { PROTECTED, UNPROTECTED } from '../graphql/queries/testQueries'
+import UsersList from '../components/UsersList'
+import ALL_USERS from '../graphql/queries/AllUsers'
+import SEND_FRIEND_REQUEST from '../graphql/mutations/SendFRequest'
 
 export default function Chat() {
-  // Test queries
-  const [protectedQuery] = useLazyQuery(PROTECTED, { fetchPolicy: 'network-only' })
-  const [unprotectedQuery] = useLazyQuery(UNPROTECTED, { fetchPolicy: 'network-only' })
+  const { data, loading, error } = useQuery(ALL_USERS)
+  const [sendRequest] = useMutation(SEND_FRIEND_REQUEST)
 
+  const handleSend = (friendId) => {
+    sendRequest({
+      variables: {
+        friendId
+      }
+    })
+  }
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <div>The GQL fetch threw errors</div>
+  }
+
+  // data was successfully fetched
   return (
     <Container>
-      <Button
-        fullWidth
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        onMouseUp={protectedQuery}
-      >
-        Protected
-      </Button>
-      <Button
-        fullWidth
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        onMouseUp={unprotectedQuery}
-      >
-        Unprotected
-      </Button>
+      <UsersList users={data.users} handleSend={handleSend} />
     </Container>
   )
 }
