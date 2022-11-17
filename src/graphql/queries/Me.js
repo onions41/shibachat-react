@@ -6,8 +6,11 @@ export default gql`
       id
       nickname
       receivedFRequests {
-        id
-        nickname
+        requester {
+          id
+          nickname
+        }
+        status
       }
     }
   }

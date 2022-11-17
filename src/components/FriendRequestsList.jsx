@@ -19,7 +19,7 @@ export default function FriendRequestsList({ requests }) {
       {
         requests.map((fr) => (
           <ListItem
-            key={`friend-request-id-${fr.id}`}
+            key={`friend-request-id-${fr.requester.id}`}
             secondaryAction={<>
               <IconButton edge="end" aria-label="accept">
                 <CheckCircleIcon />
@@ -35,7 +35,7 @@ export default function FriendRequestsList({ requests }) {
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              primary={fr.nickname}
+              primary={fr.requester.nickname}
               secondary="Wanna friends!"
             />
           </ListItem>
