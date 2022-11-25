@@ -3,27 +3,15 @@ import React, {
   useState,
   useCallback
 } from 'react'
-import { useQuery } from '@apollo/client'
+
 import {
   Drawer,
-  List,
-  Divider,
-  ListItem,
-  ListItemText,
-  IconButton,
-  ListItemAvatar,
-  Avatar
+  Divider
 } from '@mui/material'
-import {
-  Folder as FolderIcon,
-  CheckCircleOutlineOutlined as CheckCircleIcon,
-  DoNotDisturbAltOutlined as NoIcon
-} from '@mui/icons-material'
 
 // Internal imports
-import ME from '../../graphql/queries/Me'
 import NavDrawerTabs from './NavDrawerTabs'
-import FriendRequestsList from './FriendRequestsList'
+import FriendsNavPanel from './FriendsNavPanel'
 
 export default function NavDrawer() {
   /**
@@ -33,23 +21,9 @@ export default function NavDrawer() {
   const [tabIndex, setTabIndex] = useState(0)
   const handleTabChange = useCallback((_event, newValue) => {
     setTabIndex(newValue)
-  })
-
-  /**
-   * GQL Hooks
-   */
-  const { data: meData, error: meError, loading: meLoading } = useQuery(ME)
+  }, [])
 
   const drawerWidth = 280
-
-  if (meLoading) {
-    return <div style={{ width: drawerWidth }}>Loading the Me query</div>
-  }
-  if (meError) {
-    return <div style={{ width: drawerWidth }}>Me query threw an error</div>
-  } // data was fetched successfully
-
-  const { user: { receivedFRequests } } = meData
 
   return (
     <Drawer
@@ -69,7 +43,19 @@ export default function NavDrawer() {
 
       <Divider />
 
-      <FriendRequestsList requests={receivedFRequests} />
+      <NavPanel tabIndex={tabIndex} />
     </Drawer>
   )
+}
+
+function NavPanel({ tabIndex }) {
+  switch (tabIndex) {
+    case 0:
+      return <div>Nothing here yet. The recent messages navigation panel would go here.</div>
+    case 1:
+      return <FriendsNavPanel />
+    case 2:
+      return <div>Nothing here yet. Maybe the account screen would go here.</div>
+    default:
+  }
 }
