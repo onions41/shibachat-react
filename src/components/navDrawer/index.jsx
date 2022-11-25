@@ -1,3 +1,4 @@
+// Module imports
 import React, {
   useState,
   useCallback
@@ -19,7 +20,8 @@ import {
   DoNotDisturbAltOutlined as NoIcon
 } from '@mui/icons-material'
 
-import ME from '../graphql/queries/Me'
+// Internal imports
+import ME from '../../graphql/queries/Me'
 import NavDrawerTabs from './NavDrawerTabs'
 import FriendRequestsList from './FriendRequestsList'
 
