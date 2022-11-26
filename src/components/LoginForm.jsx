@@ -1,10 +1,7 @@
 // Module imports
-import React, {
-  useCallback,
-  useState
-} from 'react'
-import { useMutation } from '@apollo/client'
-import { Formik } from 'formik'
+import React, { useCallback, useState } from "react"
+import { useMutation } from "@apollo/client"
+import { Formik } from "formik"
 import {
   Button,
   TextField,
@@ -12,40 +9,37 @@ import {
   Typography,
   InputAdornment,
   IconButton
-} from '@mui/material'
-import {
-  Link as RouterLink,
-  Navigate
-} from 'react-router-dom'
+} from "@mui/material"
+import { Link as RouterLink, Navigate } from "react-router-dom"
 import {
   VisibilityOff,
   Visibility,
   Send as SendIcon
-} from '@mui/icons-material'
-import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux'
-import authInput from '../inputValidation/authInput'
+} from "@mui/icons-material"
+import styled from "styled-components"
+import { useDispatch, useSelector } from "react-redux"
+import authInput from "../inputValidation/authInput"
 
 // Internal imports
-import LOGIN from '../graphql/mutations/Login'
-import { loginAction, selectIsLoggedIn } from '../store'
+import LOGIN from "../graphql/mutations/Login"
+import { loginAction, selectIsLoggedIn } from "../store"
 
 const FormContainer = styled.div`
-width: min(400px, 100%);
-padding-left: 10px;
-padding-right: 10px;
-display: flex;
-flex-direction: column;
-align-items: center;
+  width: min(400px, 100%);
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 export default function LoginForm() {
   // Login mutation hook
   // data is used inside onSubmit
   // loading is not used as it is redundent to Formik's isSubmitting
-  const [login, {
-    error: gqlError, reset
-  }] = useMutation(LOGIN, { fetchPolicy: 'network-only' })
+  const [login, { error: gqlError, reset }] = useMutation(LOGIN, {
+    fetchPolicy: "network-only"
+  })
 
   // Redux
   const dispatch = useDispatch()
@@ -71,125 +65,130 @@ export default function LoginForm() {
     }
   }, [])
 
-  if (isLoggedIn) { return <Navigate to="/" replace /> }
+  if (isLoggedIn) {
+    return (
+      <Navigate
+        to="/"
+        replace
+      />
+    )
+  }
 
   return (
     <Formik
       initialValues={{
-        nickname: '',
-        password: ''
+        nickname: "",
+        password: ""
       }}
       validationSchema={authInput}
       validateOnBlur={false}
       validateOnChange={false}
       onSubmit={onSubmit}
     >
-      {
-        ({
-          values,
-          handleChange,
-          handleSubmit,
-          errors,
-          handleBlur,
-          isSubmitting,
-          touched
-        }) => {
-          const [showPassword, setShowPassword] = useState(false)
+      {({
+        values,
+        handleChange,
+        handleSubmit,
+        errors,
+        handleBlur,
+        isSubmitting,
+        touched
+      }) => {
+        const [showPassword, setShowPassword] = useState(false)
 
-          return (
-            <FormContainer>
-              {/* Nickname input */}
-              <TextField
-                id="nickname-input"
-                name="nickname"
-                label="Nickname"
-                helperText={
-                  errors?.nickname && touched.nickname &&
-                  errors.nickname
-                }
-                type="text"
-                autoComplete="nickname"
-                variant="filled"
-                fullWidth
-                value={values.nickname}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors?.nickname && touched.nickname}
-                autoFocus
-                sx={{
-                  marginTop: 2,
-                  marginBottom: 2
-                }}
-              />
-              {/* Password input */}
-              <TextField
-                id="password-input"
-                name="password"
-                label="Password"
-                helperText={
-                  errors?.password && touched.password &&
-                  errors.password
-                }
-                type={showPassword ? 'text' : 'password'}
-                variant="filled"
-                fullWidth
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors?.password && touched.password}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onMouseEnter={() => { setShowPassword(true) }}
-                        onMouseLeave={() => { setShowPassword(false) }}
-                        edge="end"
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-                sx={{
-                  marginTop: 2,
-                  marginBottom: 2
-                }}
-              />
-              {/* Submit button */}
-              <Button
-                variant="contained"
-                endIcon={<SendIcon />}
-                onClick={handleSubmit}
-                fullWidth
-                disabled={isSubmitting || !values.nickname || !values.password}
-                sx={{
-                  marginTop: 4,
-                  marginBottom: 2
-                }}
-              >
-                Login
-              </Button>
-              {/* Link to /register */}
-              <Link
-                component={RouterLink}
-                to="/register"
-                disabled={isSubmitting}
-                sx={{
-                  marginTop: 4,
-                  marginBottom: 2
-                }}
-              >
-                Don&apos;t have an account? Register!
-              </Link>
-              {/* GQL Error message */}
-              <Typography>
-                {`gqlErrors: ${gqlError}`}
-              </Typography>
-            </FormContainer>
-          )
-        }
-      }
+        return (
+          <FormContainer>
+            {/* Nickname input */}
+            <TextField
+              id="nickname-input"
+              name="nickname"
+              label="Nickname"
+              helperText={
+                errors?.nickname && touched.nickname && errors.nickname
+              }
+              type="text"
+              autoComplete="nickname"
+              variant="filled"
+              fullWidth
+              value={values.nickname}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors?.nickname && touched.nickname}
+              autoFocus
+              sx={{
+                marginTop: 2,
+                marginBottom: 2
+              }}
+            />
+            {/* Password input */}
+            <TextField
+              id="password-input"
+              name="password"
+              label="Password"
+              helperText={
+                errors?.password && touched.password && errors.password
+              }
+              type={showPassword ? "text" : "password"}
+              variant="filled"
+              fullWidth
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors?.password && touched.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onMouseEnter={() => {
+                        setShowPassword(true)
+                      }}
+                      onMouseLeave={() => {
+                        setShowPassword(false)
+                      }}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+              sx={{
+                marginTop: 2,
+                marginBottom: 2
+              }}
+            />
+            {/* Submit button */}
+            <Button
+              variant="contained"
+              endIcon={<SendIcon />}
+              onClick={handleSubmit}
+              fullWidth
+              disabled={isSubmitting || !values.nickname || !values.password}
+              sx={{
+                marginTop: 4,
+                marginBottom: 2
+              }}
+            >
+              Login
+            </Button>
+            {/* Link to /register */}
+            <Link
+              component={RouterLink}
+              to="/register"
+              disabled={isSubmitting}
+              sx={{
+                marginTop: 4,
+                marginBottom: 2
+              }}
+            >
+              Don&apos;t have an account? Register!
+            </Link>
+            {/* GQL Error message */}
+            <Typography>{`gqlErrors: ${gqlError}`}</Typography>
+          </FormContainer>
+        )
+      }}
     </Formik>
   )
 }

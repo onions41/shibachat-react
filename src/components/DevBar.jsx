@@ -1,15 +1,15 @@
 // Module imports
-import React from 'react'
-import styled from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux'
-import { Typography, Link, Button } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
-import { useMutation, useLazyQuery } from '@apollo/client'
+import React from "react"
+import styled from "styled-components"
+import { useSelector, useDispatch } from "react-redux"
+import { Typography, Link, Button } from "@mui/material"
+import { Link as RouterLink } from "react-router-dom"
+import { useMutation, useLazyQuery } from "@apollo/client"
 
 // Internal imports
-import { selectIsLoggedIn, logoutAction } from '../store'
-import { PROTECTED, UNPROTECTED } from '../graphql/queries/testQueries'
-import LOGOUT from '../graphql/mutations/Logout'
+import { selectIsLoggedIn, logoutAction } from "../store"
+import { PROTECTED, UNPROTECTED } from "../graphql/queries/testQueries"
+import LOGOUT from "../graphql/mutations/Logout"
 
 // Stays at the bottom of the window out of normal flow.
 const DevBarContainer = styled.div`
@@ -17,7 +17,7 @@ const DevBarContainer = styled.div`
   height: 50px;
   color: #77bc65;
   background-color: #23353b;
-  display:flex;
+  display: flex;
   justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
@@ -32,33 +32,40 @@ export default function DevBar() {
   const dispatch = useDispatch()
 
   // Test queries
-  const [protectedQuery] = useLazyQuery(PROTECTED, { fetchPolicy: 'network-only' })
-  const [unprotectedQuery] = useLazyQuery(UNPROTECTED, { fetchPolicy: 'network-only' })
+  const [protectedQuery] = useLazyQuery(PROTECTED, {
+    fetchPolicy: "network-only"
+  })
+  const [unprotectedQuery] = useLazyQuery(UNPROTECTED, {
+    fetchPolicy: "network-only"
+  })
 
   // Logout mutation
-  const [logout] = useMutation(LOGOUT, { fetchPolicy: 'network-only' })
+  const [logout] = useMutation(LOGOUT, { fetchPolicy: "network-only" })
 
   return (
     <DevBarContainer>
-      <Typography>
-        {`isLoggedIn: ${isLoggedIn}`}
-      </Typography>
-      <Link component={RouterLink} to="/">
+      <Typography>{`isLoggedIn: ${isLoggedIn}`}</Typography>
+      <Link
+        component={RouterLink}
+        to="/"
+      >
         Home
       </Link>
-      <Link component={RouterLink} to="/register">
+      <Link
+        component={RouterLink}
+        to="/register"
+      >
         Register
       </Link>
-      <Button onClick={() => { logout().then(() => dispatch(logoutAction())) }}>
+      <Button
+        onClick={() => {
+          logout().then(() => dispatch(logoutAction()))
+        }}
+      >
         Logout
       </Button>
-      <Button onClick={() => protectedQuery()}>
-        Protected
-      </Button>
-      <Button onClick={() => unprotectedQuery()}>
-        Unprotected
-      </Button>
-
+      <Button onClick={() => protectedQuery()}>Protected</Button>
+      <Button onClick={() => unprotectedQuery()}>Unprotected</Button>
     </DevBarContainer>
   )
 }

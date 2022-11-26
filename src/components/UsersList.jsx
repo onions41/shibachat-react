@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import {
   List,
   ListItem,
@@ -7,20 +7,20 @@ import {
   ListItemAvatar,
   Button,
   Avatar
-} from '@mui/material'
+} from "@mui/material"
 import {
   Folder as FolderIcon,
   DoNotDisturbAltOutlined as NoIcon
-} from '@mui/icons-material'
+} from "@mui/icons-material"
 
 export default function UsersList({ users, handleSend }) {
   return (
     <List dense>
-      {
-        users.map((u) => (
-          <ListItem
-            key={`user-id-${u.id}`}
-            secondaryAction={<>
+      {users.map((u) => (
+        <ListItem
+          key={`user-id-${u.id}`}
+          secondaryAction={
+            <>
               <Button
                 edge="end"
                 aria-label="accept"
@@ -28,22 +28,23 @@ export default function UsersList({ users, handleSend }) {
               >
                 Send friend request
               </Button>
-              <IconButton edge="end" aria-label="reject">
+              <IconButton
+                edge="end"
+                aria-label="reject"
+              >
                 <NoIcon />
               </IconButton>
-            </>}
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <FolderIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={u.nickname}
-            />
-          </ListItem>
-        ))
-      }
+            </>
+          }
+        >
+          <ListItemAvatar>
+            <Avatar>
+              <FolderIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={u.nickname} />
+        </ListItem>
+      ))}
     </List>
   )
 }
