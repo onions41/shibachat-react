@@ -1,9 +1,9 @@
 // Module imports
-import React from 'react'
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 
 // Internal imports
-import LoginForm from '../components/LoginForm'
+import LoginForm from "../components/LoginForm"
 
 const RouteContainer = styled.div`
   width: 100vw;

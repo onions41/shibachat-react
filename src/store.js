@@ -6,15 +6,15 @@
  * selectors. Then configureStore can create a Redux store using all the slices that you created.
  */
 
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { configureStore, createSlice } from "@reduxjs/toolkit"
 // Access token is stored outside of Redux store, as it is not used as state
 // and is easiler to access when it is just a global variable.
-import { setAccessToken } from './accessToken'
+import { setAccessToken } from "./accessToken"
 
 // Create a slice. A Redux store is made up of one or more slices,
 // that is, if you want to slice up your logic.
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     isLoggedIn: false
   },
@@ -25,7 +25,7 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.isLoggedIn = false
-      setAccessToken('')
+      setAccessToken("")
     }
   }
 })
@@ -33,10 +33,7 @@ const authSlice = createSlice({
 // Actions
 // These actions can be imported and used inside React functional components
 // with the useDespatch hook.
-export const {
-  login: loginAction,
-  logout: logoutAction
-} = authSlice.actions
+export const { login: loginAction, logout: logoutAction } = authSlice.actions
 
 // Selectors
 // These selectors can be imported and used as state inside
