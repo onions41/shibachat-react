@@ -1,10 +1,15 @@
+// Module imports
 import { gql } from "@apollo/client"
 
+// Internal imports
+import SentFRequestFragment from "../fragments/SentFRequestFragment"
+
 export default gql`
+  ${SentFRequestFragment}
+  
   mutation SendFRequest($friendId: Int!) {
     sendFRequest(friendId: $friendId) {
-      id
-      nickname
+      ...SentFRequestFragment
     }
   }
 `
