@@ -1,17 +1,11 @@
 // Module imports
-import React, {
-  useState,
-  useCallback
-} from 'react'
+import React, { useState, useCallback } from "react"
 
-import {
-  Drawer,
-  Divider
-} from '@mui/material'
+import { Drawer, Divider } from "@mui/material"
 
 // Internal imports
-import NavDrawerTabs from './NavDrawerTabs'
-import FriendsNavPanel from './FriendsNavPanel'
+import NavDrawerTabs from "./NavDrawerTabs"
+import FriendsNavPanel from "./FriendsNavPanel"
 
 export default function NavDrawer() {
   /**
@@ -30,16 +24,19 @@ export default function NavDrawer() {
       sx={{
         width: drawerWidth,
         flexShrink: 0,
-        '& .MuiDrawer-paper': {
+        "& .MuiDrawer-paper": {
           width: drawerWidth,
-          boxSizing: 'border-box'
+          boxSizing: "border-box"
         }
       }}
       variant="permanent"
       anchor="left"
     >
       {/* Panel navigation tabs */}
-      <NavDrawerTabs tabIndex={tabIndex} onTabChange={handleTabChange} />
+      <NavDrawerTabs
+        tabIndex={tabIndex}
+        onTabChange={handleTabChange}
+      />
 
       <Divider />
 
@@ -51,11 +48,17 @@ export default function NavDrawer() {
 function NavPanel({ tabIndex }) {
   switch (tabIndex) {
     case 0:
-      return <div>Nothing here yet. The recent messages navigation panel would go here.</div>
+      return (
+        <div>
+          Nothing here yet. The recent messages navigation panel would go here.
+        </div>
+      )
     case 1:
       return <FriendsNavPanel />
     case 2:
-      return <div>Nothing here yet. Maybe the account screen would go here.</div>
+      return (
+        <div>Nothing here yet. Maybe the account screen would go here.</div>
+      )
     default:
   }
 }
