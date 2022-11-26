@@ -1,13 +1,12 @@
 // Module imports
-import React, {
-  useEffect,
-  useState
-} from 'react'
-import Routes from './routes'
+import React, { useEffect, useState } from "react"
+import Routes from "./routes"
+import { ThemeProvider, createTheme } from "@mui/material/styles"
+import CssBaseline from "@mui/material/CssBaseline"
 
 // Internal imports
-import { useDispatch } from 'react-redux'
-import { loginAction } from './store'
+import { useDispatch } from "react-redux"
+import { loginAction } from "./store"
 
 /**
  * App is wrapped with StrictMode, ApolloProvider, ReduxProvider, and CSSBaseline (MUI) in index.js
@@ -24,32 +23,48 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [fetchError, setFetchError] = useState(false)
 
+  // Override default material theme
+  const theme = createTheme({})
+
   useEffect(() => {
     fetch(process.env.REACT_APP_REFRESH_SERVER_URL, {
-      method: 'POST',
-      credentials: 'include'
-    }).then(async (response) => {
-      const { accessToken } = await response.json()
-      if (accessToken) {
-        dispatch(loginAction(accessToken))
-      }
-      setLoading(false)
-    }).catch(() => { // Fetch only throws network errors. Ie, no connection could be made.
-      setFetchError(true)
+      method: "POST",
+      credentials: "include"
     })
+      .then(async (response) => {
+        const { accessToken } = await response.json()
+        if (accessToken) {
+          dispatch(loginAction(accessToken))
+        }
+        setLoading(false)
+      })
+      .catch(() => {
+        // Fetch only throws network errors. Ie, no connection could be made.
+        setFetchError(true)
+      })
   }, [])
 
-  // TODO: Better error screen
-  if (fetchError) {
-    return <div>Could not reach the internet</div>
-  }
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppContent
+        loading={loading}
+        error={fetchError}
+      />
+    </ThemeProvider>
+  )
+}
 
+function AppContent({ loading, error }) {
   // TODO: Better loading screen
   if (loading) {
     return <div>Loading while App tries to log in</div>
   }
 
-  return (
-    <Routes />
-  )
+  // TODO: Better error screen
+  if (error) {
+    return <div>Could not reach the internet</div>
+  }
+
+  return <Routes />
 }
