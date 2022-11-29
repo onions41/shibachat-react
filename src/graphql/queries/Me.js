@@ -3,9 +3,12 @@ import { gql } from "@apollo/client"
 
 // Internal imports
 import SentFRequestFragment from "../fragments/SentFRequestFragment"
+import ReceivedFRequestFragment from "../fragments/ReceivedFRequestFragment"
 
 export default gql`
- ${SentFRequestFragment}
+  ${SentFRequestFragment}
+  ${ReceivedFRequestFragment}
+  
   query Me {
     user {
       id
@@ -13,10 +16,7 @@ export default gql`
       receivedFRequests {
         meId # me is the sender of the request
         friendId
-        me {
-          nickname
-        }
-        status
+        ...ReceivedFRequestFragment
       }
       sentFRequests {
         meId # me is the sender of the request
