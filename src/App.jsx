@@ -1,6 +1,6 @@
 // Module imports
 import React, { useEffect, useState } from "react"
-import Routes from "./routes"
+import Router from "./routes/Router"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
 
@@ -66,5 +66,5 @@ function AppContent({ loading, error }) {
     return <div>Could not reach the internet</div>
   }
 
-  return <Routes />
+  return <Router />
 }

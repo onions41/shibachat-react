@@ -1,13 +1,19 @@
 // Module imports
 import React, { useState, useCallback } from "react"
-
+import { useQuery } from "@apollo/client"
 import { Drawer, Divider } from "@mui/material"
 
 // Internal imports
 import NavDrawerTabs from "./NavDrawerTabs"
-import FriendsNavPanel from "./FriendsNavPanel"
+import FriendsNavPanel from "./friendsNavPanel/FriendsNavPanel"
+import ME from "../../graphql/queries/Me"
 
 export default function NavDrawer() {
+  /**
+   * GQL Hooks
+   */
+  const meResult = useQuery(ME)
+
   /**
    * tabIndex is used to conditionally render different drawer content.
    * 0 for first tab, 1 for second tab...
@@ -40,12 +46,23 @@ export default function NavDrawer() {
 
       <Divider />
 
-      <NavPanel tabIndex={tabIndex} />
+      <NavDrawerContent tabIndex={tabIndex} meResult={meResult} />
     </Drawer>
   )
 }
 
-function NavPanel({ tabIndex }) {
+function NavDrawerContent({ tabIndex, meResult }) {
+  const { data, error, loading } = meResult
+
+  if (loading) {
+    return <div style={{ width: "100%" }}>Loading the Me query</div>
+  }
+
+  if (error) {
+    console.log("***Me query error: ", error)
+    return <div style={{ width: "100%" }}>Me query threw an error</div>
+  } // data was fetched successfully
+
   switch (tabIndex) {
     case 0:
       return (
@@ -54,7 +71,7 @@ function NavPanel({ tabIndex }) {
         </div>
       )
     case 1:
-      return <FriendsNavPanel />
+      return <FriendsNavPanel me={data.user} />
     case 2:
       return (
         <div>Nothing here yet. Maybe the account screen would go here.</div>
