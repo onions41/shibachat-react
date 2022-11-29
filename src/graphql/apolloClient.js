@@ -10,7 +10,13 @@ const additiveLink = from([tokenRefreshLink, authLink, httpLink])
 // Creates client out of links
 const apolloClient = new ApolloClient({
   link: additiveLink,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    typePolicies: {
+      FriendRequest: {
+        keyFields: ["meId", "friendId"]
+      }
+    }
+  })
 })
 
 export default apolloClient
