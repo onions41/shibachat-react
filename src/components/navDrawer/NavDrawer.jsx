@@ -1,6 +1,6 @@
 // Module imports
-import React, { useState, useCallback } from "react"
-import { useQuery } from "@apollo/client"
+import React, { useState, useCallback, useEffect } from "react"
+import { useLazyQuery } from "@apollo/client"
 import { Drawer, Divider } from "@mui/material"
 
 // Internal imports
@@ -9,11 +9,6 @@ import FriendsNavPanel from "./friendsNavPanel/FriendsNavPanel"
 import ME from "../../graphql/queries/Me"
 
 export default function NavDrawer() {
-  /**
-   * GQL Hooks
-   */
-  const meResult = useQuery(ME)
-
   /**
    * tabIndex is used to conditionally render different drawer content.
    * 0 for first tab, 1 for second tab...
@@ -46,13 +41,25 @@ export default function NavDrawer() {
 
       <Divider />
 
-      <NavDrawerContent tabIndex={tabIndex} meResult={meResult} />
+      <NavDrawerContent tabIndex={tabIndex} />
     </Drawer>
   )
 }
 
-function NavDrawerContent({ tabIndex, meResult }) {
-  const { data, error, loading } = meResult
+function NavDrawerContent({ tabIndex }) {
+  // Lazy query is used so it can be refreshed with a button
+  const [meQuery, { called, loading, error, data }] = useLazyQuery(ME, {
+    fetchPolicy: "cache-and-network"
+  })
+
+  // Executes the lazy query just once after the first render
+  useEffect(() => {
+    meQuery()
+  }, [])
+
+  if (!called) {
+    return null
+  }
 
   if (loading) {
     return <div style={{ width: "100%" }}>Loading the Me query</div>
@@ -60,8 +67,13 @@ function NavDrawerContent({ tabIndex, meResult }) {
 
   if (error) {
     console.log("***Me query error: ", error)
-    return <div style={{ width: "100%" }}>Me query threw an error</div>
-  } // data was fetched successfully
+    return (
+      <div style={{ width: "100%" }}>
+        Me query threw an error. Logged to console.
+      </div>
+    )
+  }
+  // data was fetched successfully
 
   switch (tabIndex) {
     case 0:
@@ -71,7 +83,12 @@ function NavDrawerContent({ tabIndex, meResult }) {
         </div>
       )
     case 1:
-      return <FriendsNavPanel me={data.user} />
+      return (
+        <FriendsNavPanel
+          me={data.user}
+          meQuery={meQuery}
+        />
+      )
     case 2:
       return (
         <div>Nothing here yet. Maybe the account screen would go here.</div>
