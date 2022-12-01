@@ -1,3 +1,4 @@
+// Module imports
 import React, { useCallback } from "react"
 import {
   ListItem,
@@ -9,29 +10,29 @@ import {
 } from "@mui/material"
 import { Folder as FolderIcon } from "@mui/icons-material"
 
-export default function SentFReqCard({
-  fRequest
-  // cancelFRequest,
+export default function ReceivedFReqCard({
+  fRequest,
+  acceptFRequest
   // cancelFReqLoading
 }) {
-  // Execute the CancelFRequest mutation when button clicked
-  // const handleCancelFReqBtnClick = useCallback(() => {
-  //   cancelFRequest({
-  //     variables: {
-  //       friendId: fRequest.friendId
-  //     }
-  //   })
-  // }, [])
+  const handleAcceptFReqBtnClick = useCallback(() => {
+    console.log("***fRequest.meId: ", fRequest.meId)
+    acceptFRequest({
+      variables: {
+        friendId: fRequest.meId
+      }
+    })
+  }, [])
 
   return (
     <ListItem
       secondaryAction={
         <Button
           variant="outlined"
-          // onClick={handleCancelFReqBtnClick}
+          onClick={handleAcceptFReqBtnClick}
           // disabled={cancelFReqLoading}
         >
-          Accept/Reject
+          Accept
         </Button>
       }
     >
@@ -45,7 +46,6 @@ export default function SentFReqCard({
       {/* Nickname */}
       <ListItemText
         primary={<Typography>{fRequest.me.nickname}</Typography>}
-        secondary={"Wants to be your friend"}
       />
     </ListItem>
   )

@@ -10,6 +10,7 @@ module.exports = {
     sourceType: "module"
   },
   plugins: ["react"],
+  ignorePatterns: ["/node_modules/*"],
   rules: {
     "space-before-function-paren": [
       "error",
