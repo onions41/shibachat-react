@@ -7,8 +7,8 @@ import SentFRequestFragment from "../fragments/SentFRequestFragment"
 export default gql`
   ${SentFRequestFragment}
 
-  mutation CancelFRequest($friendId: Int!) {
-    cancelFRequest(friendId: $friendId) {
+  mutation CancelFRequest($receiverId: Int!) {
+    cancelFRequest(receiverId: $receiverId) {
       ...SentFRequestFragment
     }
   }

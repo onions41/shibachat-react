@@ -14,13 +14,13 @@ export default gql`
       id
       nickname
       receivedFRequests {
-        meId # me is the sender of the request
-        friendId
+        senderId
+        receiverId
         ...ReceivedFRequestFragment
       }
       sentFRequests {
-        meId # me is the sender of the request
-        friendId
+        senderId
+        receiverId
         ...SentFRequestFragment
       }
     }

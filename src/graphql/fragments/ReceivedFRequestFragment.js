@@ -5,10 +5,10 @@ export default gql`
     # These always include __typename and keys in a fragment
     # (combo key in this case).
     __typename
-    meId
-    friendId
+    senderId
+    receiverId
     # And the rest
-    me { # Is the sender of a request.
+    sender { # Is the sender of a request.
       id
       nickname
     }

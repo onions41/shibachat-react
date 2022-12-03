@@ -13,7 +13,7 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache({
     typePolicies: {
       FriendRequest: {
-        keyFields: ["meId", "friendId"]
+        keyFields: ["senderId", "receiverId"]
       }
     }
   })
