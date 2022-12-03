@@ -53,7 +53,7 @@ export default function SentFReqList({ me }) {
           fRequest={fRequest}
           cancelFRequest={cancelFRequest}
           cancelFReqLoading={cancelFReqLoading}
-          key={`friend-request-${fRequest.meId}-${fRequest.friendId}`}
+          key={`friend-request-${fRequest.senderId}-${fRequest.receiverId}`}
         />
       ))}
     </List>

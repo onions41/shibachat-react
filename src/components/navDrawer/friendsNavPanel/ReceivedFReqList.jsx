@@ -17,7 +17,7 @@ export default function ReceivedFReqList({ me }) {
           fRequest={fRequest}
           acceptFRequest={acceptFRequest}
           // cancelFReqLoading={cancelFReqLoading}
-          key={`friend-request-${fRequest.meId}-${fRequest.friendId}`}
+          key={`friend-request-${fRequest.senderId}-${fRequest.receiverId}`}
         />
       ))}
     </List>

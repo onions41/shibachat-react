@@ -25,7 +25,7 @@ export default function SendFReqList({ me }) {
         // Modifies the receivedFReqFromMe field of the cached user object to true
         cache.modify({
           // Uses mutation response data to id the user object to modify
-          id: cache.identify(data.sendFRequest.friend),
+          id: cache.identify(data.sendFRequest.receiver),
           fields: {
             receivedFReqFromMe: () => true
           }

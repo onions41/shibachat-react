@@ -18,7 +18,7 @@ export default function SendFReqCard({
   const handleSendFReqBtnClick = useCallback(() => {
     sendFRequest({
       variables: {
-        friendId: user.id
+        receiverId: user.id
       }
     })
   }, [])

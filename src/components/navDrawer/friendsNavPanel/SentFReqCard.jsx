@@ -18,7 +18,7 @@ export default function SentFReqCard({
   const handleCancelFReqBtnClick = useCallback(() => {
     cancelFRequest({
       variables: {
-        friendId: fRequest.friendId
+        receiverId: fRequest.receiverId
       }
     })
   }, [])
@@ -44,7 +44,7 @@ export default function SentFReqCard({
 
       {/* Nickname */}
       <ListItemText
-        primary={<Typography>{fRequest.friend.nickname}</Typography>}
+        primary={<Typography>{fRequest.receiver.nickname}</Typography>}
         secondary={"Plz respond lol"}
       />
     </ListItem>

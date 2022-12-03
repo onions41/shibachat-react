@@ -16,10 +16,10 @@ export default function ReceivedFReqCard({
   // cancelFReqLoading
 }) {
   const handleAcceptFReqBtnClick = useCallback(() => {
-    console.log("***fRequest.meId: ", fRequest.meId)
+    console.log("***fRequest.senderId: ", fRequest.senderId)
     acceptFRequest({
       variables: {
-        friendId: fRequest.meId
+        senderId: fRequest.senderId
       }
     })
   }, [])
@@ -45,7 +45,7 @@ export default function ReceivedFReqCard({
 
       {/* Nickname */}
       <ListItemText
-        primary={<Typography>{fRequest.me.nickname}</Typography>}
+        primary={<Typography>{fRequest.sender.nickname}</Typography>}
       />
     </ListItem>
   )
