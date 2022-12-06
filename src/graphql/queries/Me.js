@@ -13,15 +13,19 @@ export default gql`
     user {
       id
       nickname
+      sentFRequests {
+        senderId
+        receiverId
+        ...SentFRequestFragment
+      }
       receivedFRequests {
         senderId
         receiverId
         ...ReceivedFRequestFragment
       }
-      sentFRequests {
-        senderId
-        receiverId
-        ...SentFRequestFragment
+      friends {
+        id
+        nickname
       }
     }
   }
