@@ -1,5 +1,4 @@
 // Module imports
-import React from "react"
 import { Tabs, Tab } from "@mui/material"
 import { ChatBubbleOutlineOutlined, GroupsOutlined } from "@mui/icons-material"
 

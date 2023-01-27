@@ -1,5 +1,4 @@
 // Module imports
-import React from "react"
 import { Modal, Typography, useTheme } from "@mui/material"
 import styled from "styled-components"
 

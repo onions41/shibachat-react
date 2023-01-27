@@ -1,5 +1,4 @@
 // Module imports
-import React from "react"
 import styled from "styled-components"
 import { useSelector, useDispatch } from "react-redux"
 import { Typography, Link, Button } from "@mui/material"

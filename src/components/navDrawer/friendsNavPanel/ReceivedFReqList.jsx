@@ -1,5 +1,4 @@
 // Module imports
-import React from "react"
 import { useMutation } from "@apollo/client"
 import { Typography, IconButton, Stack, List } from "@mui/material"
 import RefreshIcon from "@mui/icons-material/Refresh"

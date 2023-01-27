@@ -1,5 +1,5 @@
 // Module imports
-import React, { useState, useCallback } from "react"
+import { useState, useCallback } from "react"
 import { Formik } from "formik"
 import styled from "styled-components"
 import {

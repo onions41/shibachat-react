@@ -1,5 +1,5 @@
 // Module imports
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Router from "./routes/Router"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"

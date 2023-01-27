@@ -1,5 +1,5 @@
 // Module imports
-import React, { useState, useCallback, useEffect } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { useLazyQuery } from "@apollo/client"
 import { Drawer, Divider } from "@mui/material"
 

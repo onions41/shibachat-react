@@ -25,7 +25,8 @@ module.exports = {
     "no-unused-vars": 1,
     "react/prop-types": 0,
     "no-console": 1,
-    "multiline-ternary": 0
+    "multiline-ternary": 0,
+    "react/react-in-jsx-scope": 0 // React doesn't need to be imported since React v17
   },
   globals: {
     describe: "readonly",

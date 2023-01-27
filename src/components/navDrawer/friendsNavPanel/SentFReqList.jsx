@@ -1,5 +1,4 @@
 // Module imports
-import React from "react"
 import { useMutation } from "@apollo/client"
 import { List } from "@mui/material"
 
