@@ -1,10 +1,10 @@
 // Module imports
 import React from "react"
 import { useSelector } from "react-redux"
-import { Navigate, useLocation } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 // Internal imports
-import { selectIsLoggedIn } from "../store"
+import { selectIsLoggedIn } from "../../store/authSlice"
 
 /**
  * Uses the Redux login state to conditionally render the route.

@@ -1,21 +1,24 @@
 // Module imports
 import React from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Snackbar, Alert } from "@mui/material"
 
 // Routes
 import Chat from "./Chat"
 import Login from "./Login"
 import Register from "./Register"
 
-// Route wrappers
-import RequiresAuth from "../components/RequiresAuth"
-import UserControls from "../components/UserControls"
+// Internal imports
+import RequiresAuth from "./routeComponents/RequiresAuth"
+import UserControls from "./routeComponents/UserControls"
+import Toast from "./routeComponents/Toast"
 
 import DevBar from "../components/DevBar"
 
 export default function Router() {
   return (
     <BrowserRouter>
+      <Toast />
       <Routes>
         <Route
           path="/"

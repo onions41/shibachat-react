@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import NavDrawer from "./navDrawer/NavDrawer"
+import NavDrawer from "../../components/navDrawer/NavDrawer"
 
 const RouteContainer = styled.div`
   width: 100vw;
