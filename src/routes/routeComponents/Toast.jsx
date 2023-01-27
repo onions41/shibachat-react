@@ -33,7 +33,7 @@ export default function Toast() {
     >
       <Alert
         severity="success"
-        onClose={dispatch(closeAction())} // Closes when x to the right of alert is clicked
+        onClose={() => dispatch(closeAction())} // Closes when x to the right of alert is clicked
       >
         {message}
       </Alert>
