@@ -6,7 +6,7 @@ import apolloClient from "./graphql/apolloClient"
 import { Provider as ReduxProvider } from "react-redux"
 
 // Internal imports
-import store from "./store"
+import store from "./store/store"
 import App from "./App"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))

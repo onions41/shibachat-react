@@ -4,7 +4,8 @@ import jwtDecode from "jwt-decode"
 
 // Internal imports
 import { getAccessToken } from "../../accessToken"
-import store, { loginAction, logoutAction } from "../../store"
+import store from "../../store/store"
+import { loginAction, logoutAction } from "../../store/authSlice"
 
 const tokenRefreshLink = new TokenRefreshLink({
   accessTokenField: "accessToken",

@@ -22,7 +22,7 @@ import authInput from "../inputValidation/authInput"
 
 // Internal imports
 import LOGIN from "../graphql/mutations/Login"
-import { loginAction, selectIsLoggedIn } from "../store"
+import { loginAction, selectIsLoggedIn } from "../store/authSlice"
 
 const FormContainer = styled.div`
   width: min(400px, 100%);

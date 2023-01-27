@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link as RouterLink, Navigate } from "react-router-dom"
 
 // Internal imports
-import { loginAction, selectIsLoggedIn } from "../store"
+import { loginAction, selectIsLoggedIn } from "../store/authSlice"
 import authInput from "../inputValidation/authInput"
 import REGISTER from "../graphql/mutations/Register"
 

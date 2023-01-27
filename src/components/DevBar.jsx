@@ -7,9 +7,10 @@ import { Link as RouterLink } from "react-router-dom"
 import { useMutation, useLazyQuery } from "@apollo/client"
 
 // Internal imports
-import { selectIsLoggedIn, logoutAction } from "../store"
+import { selectIsLoggedIn, logoutAction } from "../store/authSlice"
 import { PROTECTED, UNPROTECTED } from "../graphql/queries/testQueries"
 import LOGOUT from "../graphql/mutations/Logout"
+import { openAction, closeAction } from "../store/toastSlice"
 
 // Stays at the bottom of the window out of normal flow.
 const DevBarContainer = styled.div`
@@ -66,6 +67,19 @@ export default function DevBar() {
       </Button>
       <Button onClick={() => protectedQuery()}>Protected</Button>
       <Button onClick={() => unprotectedQuery()}>Unprotected</Button>
+      <Button
+        onClick={() =>
+          dispatch(
+            openAction({
+              atBottom: false,
+              message: "this is the message now 333"
+            })
+          )
+        }
+      >
+        Toast On
+      </Button>
+      <Button onClick={() => dispatch(closeAction())}>Toast Off</Button>
     </DevBarContainer>
   )
 }

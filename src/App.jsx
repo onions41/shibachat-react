@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline"
 
 // Internal imports
 import { useDispatch } from "react-redux"
-import { loginAction } from "./store"
+import { loginAction } from "./store/authSlice"
 
 /**
  * App is wrapped with StrictMode, ApolloProvider, ReduxProvider, and CSSBaseline (MUI) in index.js
@@ -23,7 +23,7 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [fetchError, setFetchError] = useState(false)
 
-  // Override default material theme
+  // Override default material theme, this doesn't need to be in a the component function take it out later
   const theme = createTheme({})
 
   useEffect(() => {
