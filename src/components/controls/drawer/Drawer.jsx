@@ -4,8 +4,8 @@ import { useLazyQuery } from "@apollo/client"
 import { Drawer, Divider } from "@mui/material"
 
 // Internal imports
-import NavDrawerTabs from "./NavDrawerTabs"
-import FriendsNavPanel from "./friendsNavPanel/FriendsNavPanel"
+import NavDrawerTabs from "./DrawerTabs"
+import FriendsNavPanel from "./friendsTab/FriendsTab"
 import ME from "../../graphql/queries/Me"
 
 export default function NavDrawer() {

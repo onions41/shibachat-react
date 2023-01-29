@@ -1,6 +1,5 @@
 // Module imports
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Snackbar, Alert } from "@mui/material"
 
 // Routes
 import Chat from "./Chat"

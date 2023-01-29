@@ -1,13 +1,31 @@
 // Module imports
-import React from "react"
 import { List, Stack, Typography, IconButton } from "@mui/material"
 import RefreshIcon from "@mui/icons-material/Refresh"
 import AddIcon from "@mui/icons-material/Add"
+import { useMutation } from "@apollo/client"
 
 // Internal imports
 import FriendCard from "./FriendCard"
+import UNFRIEND from "../../../graphql/mutations/Unfriend"
 
 export default function FriendsList({ me, meQuery, handleOpenModalBtnClk }) {
+  // Unfriend mutation
+  const [unfriend] = useMutation(UNFRIEND, {
+    update(cache, { data }) {
+      // Removes the unfriended user from MeQuery
+      cache.modify({
+        id: cache.identify(me),
+        fields: {
+          friends(existingFriendRefs = [], { readField }) {
+            return existingFriendRefs.filter(
+              (friendRef) => data.unfriend.id !== readField("id", friendRef)
+            )
+          }
+        }
+      })
+    }
+  })
+
   return (
     <List dense={false}>
       <ListHeader
@@ -17,7 +35,7 @@ export default function FriendsList({ me, meQuery, handleOpenModalBtnClk }) {
       {me.friends.map((friend) => (
         <FriendCard
           friend={friend}
-          // acceptFRequest={acceptFRequest}
+          unfriend={unfriend}
           // cancelFReqLoading={cancelFReqLoading}add
           key={`friend-${friend.id}`}
         />
