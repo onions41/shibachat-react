@@ -57,10 +57,6 @@ function MenuBtn({ friend, unfriend }) {
   // Unfriend confirmation dialog open/close state
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
 
-  // Unfriend success alert open/close state
-  const [unfriendSuccessToastIsOpen, setUnfriendSuccessToastIsOpen] =
-    useState(false)
-
   // Event handlers
   const handleMenuBtnClk = (event) => {
     setAnchorEl(event.currentTarget)
@@ -82,7 +78,6 @@ function MenuBtn({ friend, unfriend }) {
         friendId: friend.id
       }
     })
-    setUnfriendSuccessToastIsOpen(true)
   }
 
   return (
@@ -117,25 +112,6 @@ function MenuBtn({ friend, unfriend }) {
         open={dialogIsOpen}
         onConfirmClick={handleUnfriendConfirmBtnClk}
       />
-
-      {/* Unfriend success Toast */}
-      {/* <Snackbar
-        open={true}
-        autoHideDuration={6000}
-        onClose={() => setUnfriendSuccessToastIsOpen(false)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        sx={{
-          position: "fixed",
-          transform: "translate(-50%, -50%)"
-        }}
-      >
-        <Alert
-          severity="success"
-          onClose={() => setUnfriendSuccessToastIsOpen(false)}
-        >
-          Unfriended {friend.nickname}
-        </Alert>
-      </Snackbar> */}
     </>
   )
 }

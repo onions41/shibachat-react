@@ -1,7 +1,12 @@
-// Module imports
-import { List, Stack, Typography, IconButton } from "@mui/material"
+// MUI
+import List from "@mui/material/List"
+import Stack from "@mui/material/Stack"
+import Typography from "@mui/material/Typography"
+import IconButton from "@mui/material/IconButton"
 import RefreshIcon from "@mui/icons-material/Refresh"
 import AddIcon from "@mui/icons-material/Add"
+
+// Module imports
 import { useMutation } from "@apollo/client"
 
 // Internal imports
@@ -28,10 +33,12 @@ export default function FriendsList({ me, meQuery, handleOpenModalBtnClk }) {
 
   return (
     <List dense={false}>
+      {/* List header */}
       <ListHeader
         meQuery={meQuery}
         handleOpenModalBtnClk={handleOpenModalBtnClk}
       />
+      {/* List items */}
       {me.friends.map((friend) => (
         <FriendCard
           friend={friend}
