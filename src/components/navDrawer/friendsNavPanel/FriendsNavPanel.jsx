@@ -1,21 +1,19 @@
-// Modudule imports
-import { useState } from "react"
-import styled from "styled-components"
+// MUI
+import Box from "@mui/material/Box"
 
-// External imports
+// Module imports
+import { useState } from "react"
+
+// Internal imports
 import FRequestsModal from "./FRequestsModal"
 import ReceivedFReqList from "./ReceivedFReqList"
 import FriendsList from "./FriendsList"
-
-const FriendsNavPanelWrapper = styled.div`
-  width: 100%;
-`
 
 export default function FriendsNavPanel({ me, meQuery }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <FriendsNavPanelWrapper>
+    <Box width="100%">
       {/* Conditionally renders a list of friend requests I received */}
       {me.receivedFRequests.length ? (
         <ReceivedFReqList
@@ -39,6 +37,6 @@ export default function FriendsNavPanel({ me, meQuery }) {
         handleClose={() => setIsModalOpen(false)}
         me={me}
       />
-    </FriendsNavPanelWrapper>
+    </Box>
   )
 }

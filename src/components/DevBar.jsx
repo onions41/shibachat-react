@@ -1,5 +1,6 @@
 // Module imports
-import styled from "styled-components"
+import Box from "@mui/material/Box"
+import styled from "@mui/material/styles/styled"
 import { useSelector, useDispatch } from "react-redux"
 import { Typography, Link, Button } from "@mui/material"
 import { Link as RouterLink } from "react-router-dom"
@@ -12,16 +13,17 @@ import LOGOUT from "../graphql/mutations/Logout"
 import { openAction, closeAction } from "../store/toastSlice"
 
 // Stays at the bottom of the window out of normal flow.
-const DevBarContainer = styled.div`
-  width: 100%;
-  height: 50px;
-  color: #77bc65;
-  background-color: #23353b;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-sizing: border-box;
-`
+const DevBarContainer = styled(Box)({
+  width: "100%",
+  height: 50,
+  color: "#77bc65",
+  backgroundColor: "#23353b",
+  display: "flex",
+  justifyContent: "space-around",
+  alignItems: "center",
+  boxSizing: "border-box"
+})
+
 /**
  * This is a component that displays some links and login state and whatnot
  * that I use for development

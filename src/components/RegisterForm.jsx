@@ -1,20 +1,19 @@
+// MUI
+import styled from "@mui/material/styles/styled"
+import Box from "@mui/material/Box"
+import TextField from "@mui/material/TextField"
+import InputAdornment from "@mui/material/InputAdornment"
+import IconButton from "@mui/material/IconButton"
+import Button from "@mui/material/Button"
+import Link from "@mui/material/Link"
+import Typography from "@mui/material/Typography"
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
+import VisibilityIcon from "@mui/icons-material/Visibility"
+import SendIcon from "@mui/icons-material/Send"
+
 // Module imports
 import { useState, useCallback } from "react"
 import { Formik } from "formik"
-import styled from "styled-components"
-import {
-  TextField,
-  InputAdornment,
-  IconButton,
-  Button,
-  Link,
-  Typography
-} from "@mui/material"
-import {
-  VisibilityOff,
-  Visibility,
-  Send as SendIcon
-} from "@mui/icons-material"
 import { useMutation } from "@apollo/client"
 import { useDispatch, useSelector } from "react-redux"
 import { Link as RouterLink, Navigate } from "react-router-dom"
@@ -24,14 +23,14 @@ import { loginAction, selectIsLoggedIn } from "../store/authSlice"
 import authInput from "../inputValidation/authInput"
 import REGISTER from "../graphql/mutations/Register"
 
-const FormContainer = styled.div`
-  width: min(400px, 100%);
-  padding-left: 10px;
-  padding-right: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
+const FormContainer = styled(Box)({
+  width: "min(400px, 100%)",
+  paddingLeft: 10,
+  paddingRight: 10,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center"
+})
 
 export default function RegisterForm() {
   // Register mutation hook
@@ -144,7 +143,7 @@ export default function RegisterForm() {
                       }}
                       edge="end"
                     >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                      {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                     </IconButton>
                   </InputAdornment>
                 )

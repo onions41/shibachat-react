@@ -1,37 +1,24 @@
-import styled from "styled-components"
+// MUI
+import styled from "@mui/material/styles/styled"
+import Box from "@mui/material/Box"
 
 import NavDrawer from "../../components/navDrawer/NavDrawer"
 
-const RouteContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-`
-
-const RightContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-`
-const ChildrenContainer = styled.div`
-  flex: 1;
-  display: flex;
-`
-
-const InputBar = styled.div`
-  height: 50px;
-  width: 100%;
-  background-color: orange;
-`
+// Just a placeholder for now
+const InputBar = styled(Box)({
+  width: "100%",
+  height: 50,
+  backgroundColor: "orange"
+})
 
 export default function UserControls({ children }) {
   return (
-    <RouteContainer>
+    <Box sx={{ width: "100vw", height: "100vh", display: "flex" }}>
       <NavDrawer />
-      <RightContainer>
-        <ChildrenContainer>{children}</ChildrenContainer>
+      <Box sx={{ flex: "1", display: "flex", flexDirection: "column" }}>
+        <Box sx={{ flex: "1", display: "flex" }}>{children}</Box>
         <InputBar />
-      </RightContainer>
-    </RouteContainer>
+      </Box>
+    </Box>
   )
 }

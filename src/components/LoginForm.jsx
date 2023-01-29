@@ -1,22 +1,21 @@
+// MUI
+import styled from "@mui/material/styles/styled"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import Link from "@mui/material/Link"
+import Typography from "@mui/material/Typography"
+import InputAdornment from "@mui/material/InputAdornment"
+import IconButton from "@mui/material/IconButton"
+import VisibilityIcon from "@mui/icons-material/Visibility"
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
+import SendIcon from "@mui/icons-material/Send"
+
 // Module imports
 import { useCallback, useState } from "react"
 import { useMutation } from "@apollo/client"
 import { Formik } from "formik"
-import {
-  Button,
-  TextField,
-  Link,
-  Typography,
-  InputAdornment,
-  IconButton
-} from "@mui/material"
 import { Link as RouterLink, Navigate } from "react-router-dom"
-import {
-  VisibilityOff,
-  Visibility,
-  Send as SendIcon
-} from "@mui/icons-material"
-import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
 import authInput from "../inputValidation/authInput"
 
@@ -24,14 +23,14 @@ import authInput from "../inputValidation/authInput"
 import LOGIN from "../graphql/mutations/Login"
 import { loginAction, selectIsLoggedIn } from "../store/authSlice"
 
-const FormContainer = styled.div`
-  width: min(400px, 100%);
-  padding-left: 10px;
-  padding-right: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
+const FormContainer = styled(Box)({
+  width: "min(400px, 100%)",
+  paddingLeft: 10,
+  paddingRight: 10,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center"
+})
 
 export default function LoginForm() {
   // Login mutation hook
@@ -148,7 +147,7 @@ export default function LoginForm() {
                       }}
                       edge="end"
                     >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                      {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                     </IconButton>
                   </InputAdornment>
                 )
