@@ -3,7 +3,7 @@ import styled from "@mui/material/styles/styled"
 import Box from "@mui/material/Box"
 
 // Internal imports
-import LoginForm from "../components/LoginForm"
+import LoginForm from "components/LoginForm"
 
 const RouteContainer = styled(Box)({
   width: "100vw",

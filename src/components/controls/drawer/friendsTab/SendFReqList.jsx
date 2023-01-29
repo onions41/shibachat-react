@@ -3,9 +3,9 @@ import { List } from "@mui/material"
 import { useQuery, useMutation } from "@apollo/client"
 
 // Internal imports
-import ALL_USERS from "../../../graphql/queries/AllUsers"
-import SEND_F_REQUEST from "../../../graphql/mutations/SendFRequest"
-import SentFRequestFragment from "../../../graphql/fragments/SentFRequestFragment"
+import ALL_USERS from "graphql/queries/AllUsers"
+import SEND_F_REQUEST from "graphql/mutations/SendFRequest"
+import SentFRequestFragment from "graphql/fragments/SentFRequestFragment"
 import SendFReqCard from "./SendFReqCard"
 
 export default function SendFReqList({ me }) {

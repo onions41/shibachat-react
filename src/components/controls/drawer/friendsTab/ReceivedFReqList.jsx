@@ -5,7 +5,7 @@ import RefreshIcon from "@mui/icons-material/Refresh"
 
 // Internal imports
 import ReceivedFReqCard from "./ReceivedFReqCard"
-import ACCEPT_F_REQUEST from "../../../graphql/mutations/AcceptFRequest"
+import ACCEPT_F_REQUEST from "graphql/mutations/AcceptFRequest"
 
 export default function ReceivedFReqList({ me, meQuery }) {
   const [acceptFRequest] = useMutation(ACCEPT_F_REQUEST)

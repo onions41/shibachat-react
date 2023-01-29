@@ -3,9 +3,9 @@ import { useMutation } from "@apollo/client"
 import { List } from "@mui/material"
 
 // Internal imports
-import CANCEL_F_REQUEST from "../../../graphql/mutations/CancelFRequest"
+import CANCEL_F_REQUEST from "graphql/mutations/CancelFRequest"
 import SentFReqCard from "./SentFReqCard"
-import SentFRequestFragment from "../../../graphql/fragments/SentFRequestFragment"
+import SentFRequestFragment from "graphql/fragments/SentFRequestFragment"
 
 export default function SentFReqList({ me }) {
   // CancelFRequest mutation

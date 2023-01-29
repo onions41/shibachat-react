@@ -3,7 +3,7 @@ import styled from "@mui/material/styles/styled"
 import Box from "@mui/material/Box"
 
 // Internal imports
-import RegisterForm from "../components/RegisterForm"
+import RegisterForm from "components/RegisterForm"
 
 const RouteContainer = styled(Box)({
   width: "100vw",

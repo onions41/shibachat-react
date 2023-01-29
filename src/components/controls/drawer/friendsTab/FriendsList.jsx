@@ -6,7 +6,7 @@ import { useMutation } from "@apollo/client"
 
 // Internal imports
 import FriendCard from "./FriendCard"
-import UNFRIEND from "../../../graphql/mutations/Unfriend"
+import UNFRIEND from "graphql/mutations/Unfriend"
 
 export default function FriendsList({ me, meQuery, handleOpenModalBtnClk }) {
   // Unfriend mutation

@@ -7,11 +7,11 @@ import Login from "./Login"
 import Register from "./Register"
 
 // Internal imports
-import RequiresAuth from "./routeComponents/RequiresAuth"
-import UserControls from "./routeComponents/UserControls"
-import Toast from "./routeComponents/Toast"
+import RequiresAuth from "components/RequiresAuth"
+import Controls from "components/controls/Controls"
+import Toast from "components/Toast"
 
-import DevBar from "../components/DevBar"
+import DevBar from "components/DevBar"
 
 export default function Router() {
   return (
@@ -22,9 +22,9 @@ export default function Router() {
           path="/"
           element={
             <RequiresAuth>
-              <UserControls>
+              <Controls>
                 <Chat />
-              </UserControls>
+              </Controls>
             </RequiresAuth>
           }
         />
