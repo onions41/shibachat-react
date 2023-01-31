@@ -28,6 +28,17 @@ export default function Router() {
             </RequiresAuth>
           }
         />
+        {/* subjectId means the id of the user me is chatting with, I'm naming it subject because later can be chatting to a group */}
+        <Route
+          path="/:subjectId"
+          element={
+            <RequiresAuth>
+              <Controls>
+                <Chat />
+              </Controls>
+            </RequiresAuth>
+          }
+        />
         <Route
           path="/login"
           element={<Login />}
