@@ -61,8 +61,7 @@ export default function Chat() {
   }
 
   // data was fetched successfully
-
-  if (!data.massages.length()) {
+  if (!data.messages.length) {
     return (
       <div style={{ width: "100%" }}>
         This user does not exist or you have never conversed with this user
