@@ -1,15 +1,9 @@
 // MUI
-import styled from "@mui/material/styles/styled"
 import Box from "@mui/material/Box"
 
+// Internal imports
 import Drawer from "./drawer/Drawer"
-
-// Just a placeholder for now
-const InputBar = styled(Box)({
-  width: "100%",
-  height: 50,
-  backgroundColor: "orange"
-})
+import InputBar from "./inputBar/InputBar"
 
 export default function UserControls({ children }) {
   return (
