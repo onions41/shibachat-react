@@ -15,7 +15,8 @@ import MessageCard from "components/MessageCard"
 export default function Chat() {
   // Hooks
   const { subjectId: subjectIdString } = useParams()
-  const subjectId = parseInt(subjectIdString, 10) // subjectId was a string, parsed into int
+  // subjectId was a string, parsed into int. If string is undefined, returns NaN.
+  const subjectId = parseInt(subjectIdString, 10)
 
   const [fetchMessages, { called, loading, error, data, subscribeToMore }] =
     useLazyQuery(MESSAGES, {
@@ -62,16 +63,6 @@ export default function Chat() {
   }, [data])
 
   // End of hooks
-
-  // There is no number in the param
-  if (typeof subjectId === "undefined") {
-    return (
-      <div style={{ width: "100%" }}>
-        You did not pick a subject, there is no subject number in the params.
-        This should display a blank stylized page.
-      </div>
-    )
-  }
 
   if (!called) {
     // TODO. Just show background in production.
