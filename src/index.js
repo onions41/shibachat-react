@@ -11,11 +11,11 @@ import App from "./App"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
-  <React.StrictMode>
-    <ApolloProvider client={apolloClient}>
-      <ReduxProvider store={store}>
-        <App />
-      </ReduxProvider>
-    </ApolloProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ApolloProvider client={apolloClient}>
+    <ReduxProvider store={store}>
+      <App />
+    </ReduxProvider>
+  </ApolloProvider>
+  // </React.StrictMode>
 )
