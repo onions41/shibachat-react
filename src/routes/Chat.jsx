@@ -1,9 +1,11 @@
+/* eslint-disable indent */
+
 // MUI
 import Container from "@mui/material/Container"
 import List from "@mui/material/List"
 
 // Module imports
-import { useEffect } from "react"
+import { useEffect, Fragment } from "react"
 import { useParams } from "react-router-dom"
 import { useLazyQuery } from "@apollo/client"
 
@@ -11,6 +13,7 @@ import { useLazyQuery } from "@apollo/client"
 import MESSAGES from "graphql/queries/Messages"
 import NEW_MESSAGE from "graphql/subscriptions/NewMessage"
 import MessageCard from "components/MessageCard"
+import DisplayDate from "components/DisplayDate"
 
 export default function Chat() {
   // Hooks
@@ -104,11 +107,15 @@ export default function Chat() {
     // TODO. Make it look good.
     <Container>
       <List dense={false}>
-        {data.messages.map((message) => (
-          <MessageCard
-            key={`message-id-${message.id}`}
-            message={message}
-          />
+        {data.messages.map((message, index, messages) => (
+          <Fragment key={`message-id-${message.id}`}>
+            <DisplayDate
+              message={message}
+              index={index}
+              messages={messages}
+            />
+            <MessageCard message={message} />
+          </Fragment>
         ))}
       </List>
     </Container>
