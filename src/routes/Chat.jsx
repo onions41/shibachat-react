@@ -73,17 +73,23 @@ export default function Chat() {
     )
   }
 
-  // Not called yet. This screen should never last very long as query will be called in the effect immediately after, but
-  // is required coordinate the query status to the renders.
-  if (!called) { // TODO. Just show background in production.
-    return <div style={{ width: "100%" }}>Query not called yet</div>
+  if (!called) {
+    // TODO. Just show background in production.
+    return (
+      <div style={{ width: "100%" }}>
+        Query not called yet, probably because a friend was not selected. Ie,
+        params is blank.
+      </div>
+    )
   }
 
-  if (loading) { // TODO. Show loading animation.
+  if (loading) {
+    // TODO. Show loading animation.
     return <div style={{ width: "100%" }}>Loading the Messages query</div>
   }
 
-  if (error) { // TODO. Display via toast
+  if (error) {
+    // TODO. Display via toast
     return (
       <div style={{ width: "100%" }}>
         Messages query threw an error. Logged to console.
@@ -103,7 +109,8 @@ export default function Chat() {
     )
   }
 
-  return ( // TODO. Make it look good.
+  return (
+    // TODO. Make it look good.
     <Container>
       <List dense={false}>
         {data.messages.map((message) => (
