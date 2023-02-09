@@ -8,7 +8,9 @@ export default function DisplayDate({ message, index, messages }) {
   const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000) // by subtracting 24 hours in ms
 
   // The very first message must display a date
-  if (index === 0) {
+  // The query returns desc by createdAt date, so
+  // the last array element has the first message to be created
+  if (index === messages.length - 1) {
     if (isItTheSameDay(now, thisMessageDate)) {
       return <Divider>Today</Divider>
     }
@@ -20,7 +22,7 @@ export default function DisplayDate({ message, index, messages }) {
 
   // Not the very first message
 
-  const lastMessageDate = new Date(parseInt(messages[index - 1].createdAt, 10))
+  const lastMessageDate = new Date(parseInt(messages[index + 1].createdAt, 10))
 
   // Don't display the date if this message was sent on
   // the same day as the last message

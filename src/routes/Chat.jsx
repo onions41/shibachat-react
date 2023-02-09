@@ -3,6 +3,7 @@
 // MUI
 import Container from "@mui/material/Container"
 import List from "@mui/material/List"
+import Stack from "@mui/material/Stack"
 
 // Module imports
 import { useEffect, Fragment } from "react"
@@ -55,7 +56,7 @@ export default function Chat() {
           // Query object must be returned immutably
           return {
             ...prev,
-            messages: [...prev.messages, subscriptionData.data.newMessage]
+            messages: [subscriptionData.data.newMessage, ...prev.messages]
           }
         }
       })
@@ -91,7 +92,7 @@ export default function Chat() {
     )
   }
 
-  // data was fetched successfully
+  // data was fetched successfully, but empty
 
   // messages query always returns an array, if its empty that means
   // that the user does not exist, or there are just no messages between the users
@@ -103,18 +104,25 @@ export default function Chat() {
     )
   }
 
+  // data was fetch succesfully, and it actually contains results
+
   return (
     // TODO. Make it look good.
     <Container>
-      <List dense={false}>
+      {/* Using stack as the component so I can reverse the order */}
+      <List
+        dense={false}
+        component={Stack}
+        direction="column-reverse"
+      >
         {data.messages.map((message, index, messages) => (
           <Fragment key={`message-id-${message.id}`}>
+            <MessageCard message={message} />
             <DisplayDate
               message={message}
               index={index}
               messages={messages}
             />
-            <MessageCard message={message} />
           </Fragment>
         ))}
       </List>
