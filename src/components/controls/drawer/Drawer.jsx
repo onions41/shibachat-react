@@ -2,11 +2,13 @@
 import { useState, useCallback, useEffect } from "react"
 import { useLazyQuery } from "@apollo/client"
 import { Drawer, Divider } from "@mui/material"
+import { useDispatch } from "react-redux"
 
 // Internal imports
 import DrawerTabs from "./DrawerTabs"
 import FriendsNavPanel from "./friendsTab/FriendsTab"
 import ME from "graphql/queries/Me"
+import { doneAction, resetAction } from "store/meSlice"
 
 export default function NavDrawer() {
   /**
@@ -47,6 +49,8 @@ export default function NavDrawer() {
 }
 
 function NavDrawerContent({ tabIndex }) {
+  const dispatch = useDispatch()
+
   // Lazy query is used so it can be refreshed with a button
   const [meQuery, { called, loading, error, data }] = useLazyQuery(ME, {
     fetchPolicy: "cache-and-network"
@@ -56,6 +60,15 @@ function NavDrawerContent({ tabIndex }) {
   useEffect(() => {
     meQuery()
   }, [])
+
+  // Whenever data changes the fetchWasSuccessful Redux state is updated
+  useEffect(() => {
+    if (data) {
+      dispatch(doneAction())
+    } else {
+      dispatch(resetAction())
+    }
+  }, [data])
 
   if (!called) {
     return null

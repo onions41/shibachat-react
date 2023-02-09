@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 // MUI
 import ListItem from "@mui/material/ListItem"
 import ListItemText from "@mui/material/ListItemText"
@@ -8,8 +9,8 @@ import Avatar from "@mui/material/Avatar"
 // Internal imports
 import millisecondsToTime from "utility/millisecondsToTime"
 
-export default function MessageCard({ message }) {
-  const { textContent, createdAt } = message
+export default function MessageCard({ message, friend }) {
+  const { textContent, createdAt, senderId } = message
 
   return (
     <ListItem alignItems="flex-start">
@@ -31,7 +32,11 @@ export default function MessageCard({ message }) {
               variant="body2"
               color="text.primary"
             >
-              Homer Simpsones
+              {friend.id && friend.id === senderId
+                ? friend.nickname // Displays the nickname of the friend if the id in params matches
+                : friend.id
+                ? "Me" // If it doesn't match
+                : "Loading" /* friend.id is not defined because meQuery hasn't loaded yet */}
             </Typography>
             <Typography
               sx={{ display: "inline" }}

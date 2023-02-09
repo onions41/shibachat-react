@@ -8,19 +8,27 @@ import Stack from "@mui/material/Stack"
 // Module imports
 import { useEffect, Fragment } from "react"
 import { useParams } from "react-router-dom"
-import { useLazyQuery } from "@apollo/client"
+import { useLazyQuery, useApolloClient } from "@apollo/client"
+import { useSelector } from "react-redux"
+import find from "lodash/find"
 
 // Internal imports
 import MESSAGES from "graphql/queries/Messages"
 import NEW_MESSAGE from "graphql/subscriptions/NewMessage"
+import ME from "graphql/queries/Me"
 import MessageCard from "components/MessageCard"
 import DisplayDate from "components/DisplayDate"
+import { selectMeQueryDone } from "store/meSlice"
 
 export default function Chat() {
   // Hooks
   const { subjectId: subjectIdString } = useParams()
   // subjectId was a string, parsed into int. If string is undefined, returns NaN.
   const subjectId = parseInt(subjectIdString, 10)
+
+  const client = useApolloClient()
+
+  const meQueryDone = useSelector(selectMeQueryDone)
 
   const [fetchMessages, { called, loading, error, data, subscribeToMore }] =
     useLazyQuery(MESSAGES, {
@@ -104,7 +112,16 @@ export default function Chat() {
     )
   }
 
-  // data was fetch succesfully, and it actually contains results
+  // data was fetched succesfully, and it actually contains results
+
+  let friend = {}
+  if (meQueryDone) {
+    const meQueryData = client.readQuery({ query: ME })
+    const friendObj = find(meQueryData.user.friends, (o) => o.id === subjectId)
+    if (friendObj) {
+      friend = friendObj
+    }
+  }
 
   return (
     // TODO. Make it look good.
@@ -117,7 +134,7 @@ export default function Chat() {
       >
         {data.messages.map((message, index, messages) => (
           <Fragment key={`message-id-${message.id}`}>
-            <MessageCard message={message} />
+            <MessageCard message={message} friend={friend} />
             <DisplayDate
               message={message}
               index={index}
