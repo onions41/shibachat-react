@@ -9,9 +9,21 @@ export default function UserControls({ children }) {
   return (
     <Box sx={{ width: "100vw", height: "100vh", display: "flex" }}>
       <Drawer />
-      <Box sx={{ flex: "1", display: "flex", flexDirection: "column" }}>
-        <Box sx={{ flex: "1", display: "flex" }}>{children}</Box>
-        <InputBar />
+      {/* flex grow one so it fills the page horizontally */}
+      <Box sx={{ flex: "1" }}>
+        <Box
+          sx={{
+            height: "calc(100% - 70px)",
+            overflow: "scroll",
+            display: "flex",
+            flexDirection: "column-reverse"
+          }} // This flex column reverse is soley used to start the scrolling of the box at the bottom, even though there is only one child.
+        >
+          {children}
+        </Box>
+        <Box sx={{ height: 70 }}>
+          <InputBar />
+        </Box>
       </Box>
     </Box>
   )
