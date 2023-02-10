@@ -1,148 +1,85 @@
-/* eslint-disable indent */
-
 // MUI
 import Container from "@mui/material/Container"
-import List from "@mui/material/List"
+import Box from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
 
-// Module imports
-import { useEffect, Fragment } from "react"
-import { useParams } from "react-router-dom"
-import { useLazyQuery, useApolloClient } from "@apollo/client"
-import { useSelector } from "react-redux"
-import find from "lodash/find"
+// Components
+import Sidebar from "components/chat/sidebar/Sidebar"
 
-// Internal imports
-import MESSAGES from "graphql/queries/Messages"
-import NEW_MESSAGE from "graphql/subscriptions/NewMessage"
-import ME from "graphql/queries/Me"
-import MessageCard from "components/MessageCard"
-import DisplayDate from "components/DisplayDate"
-import { selectMeQueryDone } from "store/meSlice"
+const ChatRouteContainer = ({ children }) => (
+  <Container
+    maxWidth="xl"
+    disableGutters={true}
+    sx={{ height: "100%", pt: 2, backgroundColor: "aquamarine" }}
+  >
+    <Stack
+      direction="row"
+      spacing={2}
+      px={2}
+      sx={{ height: "100%" }}
+    >
+      {children}
+    </Stack>
+  </Container>
+)
 
-export default function Chat() {
-  // Hooks
-  const { subjectId: subjectIdString } = useParams()
-  // subjectId was a string, parsed into int. If string is undefined, returns NaN.
-  const subjectId = parseInt(subjectIdString, 10)
+const SidebarContainer = ({ children }) => (
+  <Stack
+    sx={{
+      width: "27%",
+      height: "100%",
+      backgroundColor: "plum"
+    }}
+  >
+    {children}
+  </Stack>
+)
 
-  const client = useApolloClient()
+const ContentContainer = ({ children }) => (
+  <Box
+    sx={{
+      width: "73%",
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: "rebeccapurple"
+    }}
+  >
+    {children}
+  </Box>
+)
 
-  const meQueryDone = useSelector(selectMeQueryDone)
+export default function Test({ meCalled, meLoading, meError, me }) {
+  if (!meCalled) {
+    return null
+  }
 
-  const [fetchMessages, { called, loading, error, data, subscribeToMore }] =
-    useLazyQuery(MESSAGES, {
-      fetchPolicy: "network-only"
-    })
+  if (meLoading) {
+    return <div style={{ width: "100%" }}>Loading the Me query</div>
+  }
 
-  // Calls the query each time the subjectId changes if subjectId exists
-  useEffect(() => {
-    if (subjectId) {
-      fetchMessages({
-        variables: {
-          friendId: subjectId
-        }
-      })
-    }
-  }, [subjectId])
-
-  // Unsubscribes then Subscribes each time data changes.
-  // (data changes when data is successfully fetched)
-  // The first time data is defined, this effect runs, subscribing.
-  // Then, each time data is redefined, effect cleanup runs (unsubscribe)
-  // then the effect runs (subscribe). When finally navigating away, cleanup will run.
-  useEffect(() => {
-    if (data) {
-      // Once all messages have been queried, subscribe.
-      const unsubscribe = subscribeToMore({
-        document: NEW_MESSAGE,
-        variables: { friendId: subjectId },
-        // ctrl+click updateQuery to see signature. Dont bother checking docs, it only adds confusion.
-        updateQuery(prev, { subscriptionData }) {
-          // If the subscription does not fetch a new message return the previous query result
-          if (!subscriptionData?.data) return prev
-          // Query object must be returned immutably
-          return {
-            ...prev,
-            messages: [subscriptionData.data.newMessage, ...prev.messages]
-          }
-        }
-      })
-      return () => {
-        unsubscribe()
-      }
-    }
-  }, [data])
-
-  // End of hooks
-
-  if (!called) {
-    // TODO. Just show background in production.
+  if (meError) {
+    console.log("***Me query error: ", meError)
     return (
       <div style={{ width: "100%" }}>
-        Query not called yet, probably because a friend was not selected. Ie,
-        params is blank.
+        Me query threw an error. Logged to console.
       </div>
     )
   }
 
-  if (loading) {
-    // TODO. Show loading animation.
-    return <div style={{ width: "100%" }}>Loading the Messages query</div>
-  }
-
-  if (error) {
-    // TODO. Display via toast
-    return (
-      <div style={{ width: "100%" }}>
-        Messages query threw an error. Logged to console.
-      </div>
-    )
-  }
-
-  // data was fetched successfully, but empty
-
-  // messages query always returns an array, if its empty that means
-  // that the user does not exist, or there are just no messages between the users
-  if (!data.messages.length) {
-    return (
-      <div style={{ width: "100%" }}>
-        This user does not exist or you have never conversed with this user
-      </div>
-    )
-  }
-
-  // data was fetched succesfully, and it actually contains results
-
-  let friend = {}
-  if (meQueryDone) {
-    const meQueryData = client.readQuery({ query: ME })
-    const friendObj = find(meQueryData.user.friends, (o) => o.id === subjectId)
-    if (friendObj) {
-      friend = friendObj
-    }
-  }
+  // data was fetched successfully
 
   return (
-    // TODO. Make it look good.
-    <Container>
-      {/* Using stack as the component so I can reverse the order */}
-      <List
-        dense={false}
-        component={Stack}
-        direction="column-reverse"
-      >
-        {data.messages.map((message, index, messages) => (
-          <Fragment key={`message-id-${message.id}`}>
-            <MessageCard message={message} friend={friend} />
-            <DisplayDate
-              message={message}
-              index={index}
-              messages={messages}
-            />
-          </Fragment>
-        ))}
-      </List>
-    </Container>
+    <ChatRouteContainer>
+      <SidebarContainer>
+        <Sidebar me={me} />
+      </SidebarContainer>
+      <ContentContainer>
+        <div>
+          This is the content container where I will put the messages list, the
+          input box...
+        </div>
+      </ContentContainer>
+    </ChatRouteContainer>
   )
 }
