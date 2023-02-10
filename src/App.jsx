@@ -1,12 +1,10 @@
 // Module imports
 import { useEffect, useState } from "react"
-import Router from "./routes/Router"
-import { ThemeProvider, createTheme } from "@mui/material/styles"
-import CssBaseline from "@mui/material/CssBaseline"
+import { useDispatch } from "react-redux"
 
 // Internal imports
-import { useDispatch } from "react-redux"
-import { loginAction } from "./store/authSlice"
+import { loginAction } from "store/authSlice"
+import Router from "routes/Router"
 
 /**
  * App is wrapped with StrictMode, ApolloProvider, ReduxProvider, and CSSBaseline (MUI) in index.js
@@ -22,9 +20,6 @@ export default function App() {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const [fetchError, setFetchError] = useState(false)
-
-  // Override default material theme, this doesn't need to be in a the component function take it out later
-  const theme = createTheme({})
 
   useEffect(() => {
     fetch(process.env.REACT_APP_REFRESH_SERVER_URL, {
@@ -44,27 +39,15 @@ export default function App() {
       })
   }, [])
 
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppContent
-        loading={loading}
-        error={fetchError}
-      />
-    </ThemeProvider>
-  )
-}
-
-function AppContent({ loading, error }) {
   // TODO: Better loading screen
   if (loading) {
     return <div>Loading while App tries to log in</div>
   }
 
   // TODO: Better error screen
-  if (error) {
+  if (fetchError) {
     return <div>Could not reach the internet</div>
   }
 
   return <Router />
-}
+  
