@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 // Internal imports
 import { selectIsLoggedIn } from "store/authSlice"
 import ME from "graphql/queries/Me"
+import Template from "components/router/template/Template"
 
 // Routes
 import Chat from "routes/Chat"
@@ -43,12 +44,14 @@ export default function Router() {
           path="/"
           element={
             isLoggedIn ? (
-              <Chat
-                meCalled={called}
-                meLoading={loading}
-                meError={error}
-                me={data?.user}
-              />
+              <Template>
+                <Chat
+                  meCalled={called}
+                  meLoading={loading}
+                  meError={error}
+                  me={data?.user}
+                />
+              </Template>
             ) : (
               <Navigate
                 to="/login"
@@ -61,12 +64,14 @@ export default function Router() {
           path="/chat"
           element={
             isLoggedIn ? (
-              <Chat
-                meCalled={called}
-                meLoading={loading}
-                meError={error}
-                me={data?.user}
-              />
+              <Template>
+                <Chat
+                  meCalled={called}
+                  meLoading={loading}
+                  meError={error}
+                  me={data?.user}
+                />
+              </Template>
             ) : (
               <Navigate
                 to="/login"
@@ -79,12 +84,14 @@ export default function Router() {
           path="/chat/:subjectId"
           element={
             isLoggedIn ? (
-              <Chat
-                meCalled={called}
-                meLoading={loading}
-                meError={error}
-                me={data?.user}
-              />
+              <Template>
+                <Chat
+                  meCalled={called}
+                  meLoading={loading}
+                  meError={error}
+                  me={data?.user}
+                />
+              </Template>
             ) : (
               <Navigate
                 to="/login"
