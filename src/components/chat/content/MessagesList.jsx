@@ -126,24 +126,30 @@ export default function Content({ me }) {
   }
   return (
     /* Using stack as the component so I can reverse the order */
-    <List
-      dense={false}
-      component={Stack}
-      direction="column-reverse"
+    // Wrapping the list in container seems to fix the divider error where the text is offset
+    <Container
+      maxWidth={false}
+      disableGutters={true}
     >
-      {data.messages.map((message, index, messages) => (
-        <Fragment key={`message-id-${message.id}`}>
-          <MessageCard
-            message={message}
-            friend={friend}
-          />
-          <DisplayDate
-            message={message}
-            index={index}
-            messages={messages}
-          />
-        </Fragment>
-      ))}
-    </List>
+      <List
+        dense={false}
+        component={Stack}
+        direction="column-reverse"
+      >
+        {data.messages.map((message, index, messages) => (
+          <Fragment key={`message-id-${message.id}`}>
+            <MessageCard
+              message={message}
+              friend={friend}
+            />
+            <DisplayDate
+              message={message}
+              index={index}
+              messages={messages}
+            />
+          </Fragment>
+        ))}
+      </List>
+    </Container>
   )
 }
