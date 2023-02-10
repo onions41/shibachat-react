@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack"
 
 // Components
 import Sidebar from "components/chat/sidebar/Sidebar"
+import Content from "components/chat/content/Content"
 
 const ChatRouteContainer = ({ children }) => (
   <Container
@@ -49,7 +50,7 @@ const ContentContainer = ({ children }) => (
   </Box>
 )
 
-export default function Test({ meCalled, meLoading, meError, me }) {
+export default function Chat({ meCalled, meLoading, meError, me }) {
   if (!meCalled) {
     return null
   }
@@ -75,10 +76,7 @@ export default function Test({ meCalled, meLoading, meError, me }) {
         <Sidebar me={me} />
       </SidebarContainer>
       <ContentContainer>
-        <div>
-          This is the content container where I will put the messages list, the
-          input box...
-        </div>
+        <Content me={me} />
       </ContentContainer>
     </ChatRouteContainer>
   )

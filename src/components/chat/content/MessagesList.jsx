@@ -1,3 +1,5 @@
+import MessageCard from "./MessageCard"
+
 /* eslint-disable indent */
 
 // MUI
@@ -16,11 +18,11 @@ import find from "lodash/find"
 import MESSAGES from "graphql/queries/Messages"
 import NEW_MESSAGE from "graphql/subscriptions/NewMessage"
 import ME from "graphql/queries/Me"
-import MessageCard from "components/MessageCard"
-import DisplayDate from "components/chat/content/DisplayDate"
+import DisplayDate from "./DisplayDate"
+
 import { selectMeQueryDone } from "store/meSlice"
 
-export default function Chat() {
+export default function Content({ me }) {
   // Hooks
   const { subjectId: subjectIdString } = useParams()
   // subjectId was a string, parsed into int. If string is undefined, returns NaN.
@@ -122,27 +124,26 @@ export default function Chat() {
       friend = friendObj
     }
   }
-
   return (
-    // TODO. Make it look good.
-    <Container>
-      {/* Using stack as the component so I can reverse the order */}
-      <List
-        dense={false}
-        component={Stack}
-        direction="column-reverse"
-      >
-        {data.messages.map((message, index, messages) => (
-          <Fragment key={`message-id-${message.id}`}>
-            <MessageCard message={message} friend={friend} />
-            <DisplayDate
-              message={message}
-              index={index}
-              messages={messages}
-            />
-          </Fragment>
-        ))}
-      </List>
-    </Container>
+    /* Using stack as the component so I can reverse the order */
+    <List
+      dense={false}
+      component={Stack}
+      direction="column-reverse"
+    >
+      {data.messages.map((message, index, messages) => (
+        <Fragment key={`message-id-${message.id}`}>
+          <MessageCard
+            message={message}
+            friend={friend}
+          />
+          <DisplayDate
+            message={message}
+            index={index}
+            messages={messages}
+          />
+        </Fragment>
+      ))}
+    </List>
   )
 }
