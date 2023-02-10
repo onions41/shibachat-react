@@ -8,7 +8,7 @@ import {
   selectAtBottom,
   selectIsOpen,
   selectMessage
-} from "../store/toastSlice"
+} from "../../store/toastSlice"
 
 export default function Toast() {
   // Redux

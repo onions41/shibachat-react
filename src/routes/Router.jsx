@@ -14,7 +14,7 @@ import Login from "routes/Login"
 import Register from "routes/Register"
 
 // Components
-import Toast from "components/Toast"
+import Toast from "components/router/Toast"
 
 export default function Router() {
   // Hooks
