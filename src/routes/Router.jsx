@@ -1,19 +1,40 @@
 // Module imports
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-
-// Routes
-import Chat from "./Chat"
-import Login from "./Login"
-import Register from "./Register"
+import { useEffect } from "react"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { useLazyQuery } from "@apollo/client"
+import { useSelector } from "react-redux"
 
 // Internal imports
-import RequiresAuth from "components/RequiresAuth"
-import Controls from "components/controls/Controls"
+import { selectIsLoggedIn } from "store/authSlice"
+import ME from "graphql/queries/Me"
+
+// Routes
+import Chat from "routes/Chat"
+import Login from "routes/Login"
+import Register from "routes/Register"
+
+// Components
 import Toast from "components/Toast"
 
-import DevBar from "components/DevBar"
-
 export default function Router() {
+  // Hooks
+  const isLoggedIn = useSelector(selectIsLoggedIn)
+
+  const [meQuery, { called, loading, error, data }] = useLazyQuery(ME, {
+    fetchPolicy: "cache-and-network"
+  }) // TODO. Consider polling this query later on
+
+  // Executes the lazy query only once when logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      meQuery()
+    }
+  }, [isLoggedIn])
+
+  // End of Hooks
+
+  // Do not use nested routes, this app is too simple to be using Outlets.
+  // https://reactrouter.com/en/main/start/concepts#outlets
   return (
     <BrowserRouter>
       <Toast />
@@ -21,22 +42,55 @@ export default function Router() {
         <Route
           path="/"
           element={
-            <RequiresAuth>
-              <Controls>
-                <Chat />
-              </Controls>
-            </RequiresAuth>
+            isLoggedIn ? (
+              <Chat
+                meCalled={called}
+                meLoading={loading}
+                meError={error}
+                me={data?.user}
+              />
+            ) : (
+              <Navigate
+                to="/login"
+                replace
+              />
+            )
           }
         />
-        {/* subjectId means the id of the user me is chatting with, I'm naming it subject because later can be chatting to a group */}
         <Route
-          path="/:subjectId"
+          path="/chat"
           element={
-            <RequiresAuth>
-              <Controls>
-                <Chat />
-              </Controls>
-            </RequiresAuth>
+            isLoggedIn ? (
+              <Chat
+                meCalled={called}
+                meLoading={loading}
+                meError={error}
+                me={data?.user}
+              />
+            ) : (
+              <Navigate
+                to="/login"
+                replace
+              />
+            )
+          }
+        />
+        <Route
+          path="/chat/:subjectId"
+          element={
+            isLoggedIn ? (
+              <Chat
+                meCalled={called}
+                meLoading={loading}
+                meError={error}
+                me={data?.user}
+              />
+            ) : (
+              <Navigate
+                to="/login"
+                replace
+              />
+            )
           }
         />
         <Route
@@ -47,18 +101,15 @@ export default function Router() {
           path="/register"
           element={<Register />}
         />
-        {/* <Route path="/teams" element={<RequiresAuth><ViewTeams /></RequiresAuth>} />
-        <Route path="/teams/:teamId" element={<RequiresAuth><ViewTeams /></RequiresAuth>} />
-        <Route path="/teams/:teamId/:chatMode" element={<RequiresAuth><ViewTeams /></RequiresAuth>} />
-        <Route path="/teams/:teamId/:chatMode/:subjectId" element={<RequiresAuth><ViewTeams /></RequiresAuth>} />
         <Route
-          path="/teams/new"
-          element={
-            <RequiresAuth><CreateTeam /></RequiresAuth>
-          }
-        /> */}
+          path="/register"
+          element={<Register />}
+        />
+        <Route
+          path="/:everythingElse"
+          element={<div>That route doesnt exist</div>}
+        />
       </Routes>
-      <DevBar />
     </BrowserRouter>
   )
 }
