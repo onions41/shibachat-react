@@ -11,9 +11,13 @@ const palette = {
     primary: "#292b30", // parakeet black
     secondary: "#969b91" // lime gray
   },
-  footer: {
-    main: "#393a3c",
+  border: {
+    gray: "#e4e2e0",
     contrastText: "#FFFFFF"
+  },
+  background: {
+    offWhite: "#f6f6f6",
+    white: "#ffffff"
   }
 }
 

@@ -2,6 +2,7 @@
 import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
+import styled from "@mui/material/styles/styled"
 
 // Components
 import Sidebar from "components/chat/sidebar/Sidebar"
@@ -11,7 +12,7 @@ const ChatRouteContainer = ({ children }) => (
   <Container
     maxWidth="xl"
     disableGutters={true}
-    sx={{ height: "100%", pt: 2, backgroundColor: "aquamarine" }}
+    sx={{ height: "100%", pt: 2 }}
   >
     <Stack
       direction="row"
@@ -24,31 +25,29 @@ const ChatRouteContainer = ({ children }) => (
   </Container>
 )
 
-const SidebarContainer = ({ children }) => (
-  <Stack
-    sx={{
-      width: "27%",
-      height: "100%",
-      backgroundColor: "plum"
-    }}
-  >
-    {children}
-  </Stack>
-)
+const SidebarContainer = styled(Stack)(({ theme }) => ({
+  width: "27%",
+  height: "100%",
+  backgroundColor: theme.palette.background.white,
+  borderWidth: "1px 1px 0",
+  borderStyle: "solid",
+  borderColor: theme.palette.border.gray,
+  borderTopRightRadius: 8,
+  borderTopLeftRadius: 8
+}))
 
-const ContentContainer = ({ children }) => (
-  <Box
-    sx={{
-      width: "73%",
-      height: "100%",
-      display: "flex",
-      flexDirection: "column",
-      backgroundColor: "rebeccapurple"
-    }}
-  >
-    {children}
-  </Box>
-)
+const ContentContainer = styled(Box)(({ theme }) => ({
+  width: "73%",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: theme.palette.background.white,
+  borderWidth: "1px 1px 0",
+  borderStyle: "solid",
+  borderColor: theme.palette.border.gray,
+  borderTopRightRadius: 8,
+  borderTopLeftRadius: 8
+}))
 
 export default function Chat({ meCalled, meLoading, meError, me }) {
   if (!meCalled) {
