@@ -115,7 +115,6 @@ export default function Content({ me }) {
     // Wrapping the list in container seems to fix the divider error where the text is offset
     <Container
       maxWidth={false}
-      disableGutters={true}
     >
       <List
         dense={false}

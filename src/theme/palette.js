@@ -8,8 +8,9 @@ const palette = {
     light: "#63e942"
   },
   text: {
-    primary: "#292b30", // parakeet black
-    secondary: "#969b91" // lime gray
+    primary: "#000000",
+    secondary: "rgb(45, 45, 45)",
+    tertiary: "rgb(89, 89, 89)"
   },
   border: {
     gray: "#e4e2e0",

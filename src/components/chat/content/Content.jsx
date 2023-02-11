@@ -9,7 +9,7 @@ export default function Content({ me }) {
     <Stack sx={{ height: "100%" }}>
       <Box
         sx={{
-          height: "calc(100% - 70px)",
+          height: "calc(100% - 72px)", // compensating for the border of the ContentContainer in Chat
           overflow: "scroll",
           display: "flex",
           flexDirection: "column-reverse"

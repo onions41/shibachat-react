@@ -1,6 +1,5 @@
 // MUI
 import Box from "@mui/material/Box"
-import Stack from "@mui/material/Stack"
 import useTheme from "@mui/material/styles/useTheme"
 
 // Internal imports
@@ -13,7 +12,7 @@ export default function Template({ children }) {
     <Box sx={{ width: "100vw", height: "100vh", backgroundColor: palette.background.offWhite }}>
       <Box
         sx={{
-          height: "80px",
+          height: "70px",
           backgroundColor: palette.background.white,
           borderBottomWidth: "1px",
           borderBottomColor: palette.border.gray,
@@ -24,7 +23,7 @@ export default function Template({ children }) {
       </Box>
       <Box
         sx={{
-          height: "calc(100vh - 80px)"
+          height: "calc(100vh - 70px)"
         }}
       >
         {children}

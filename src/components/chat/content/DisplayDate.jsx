@@ -1,6 +1,25 @@
 import Divider from "@mui/material/Divider"
 import isItTheSameDay from "utility/isItTheSameDay"
 import formatDate from "utility/formatDate"
+import useTheme from "@mui/material/styles/useTheme"
+
+const DateDivider = ({ children }) => {
+  const { palette } = useTheme()
+  return (
+    <Divider
+      component="li"
+      sx={{
+        color: palette.text.tertiary,
+        fontSize: "0.80rem",
+        fontWeight: "bold",
+        margin: "-19px 0 -9px",
+        paddingTop: "10px"
+      }}
+    >
+      {children}
+    </Divider>
+  )
+}
 
 export default function DisplayDate({ message, index, messages }) {
   const thisMessageDate = new Date(parseInt(message.createdAt, 10))
@@ -12,12 +31,12 @@ export default function DisplayDate({ message, index, messages }) {
   // the last array element has the first message to be created
   if (index === messages.length - 1) {
     if (isItTheSameDay(now, thisMessageDate)) {
-      return <Divider>Today</Divider>
+      return <DateDivider>TODAY</DateDivider>
     }
     if (isItTheSameDay(yesterday, thisMessageDate)) {
-      return <Divider>Yesterday</Divider>
+      return <DateDivider>YESTERDAY</DateDivider>
     }
-    return <Divider>{formatDate(thisMessageDate)}</Divider>
+    return <DateDivider>{formatDate(thisMessageDate).toUpperCase()}</DateDivider>
   }
 
   // Not the very first message
@@ -31,12 +50,12 @@ export default function DisplayDate({ message, index, messages }) {
   }
 
   if (isItTheSameDay(now, thisMessageDate)) {
-    return <Divider>Today</Divider>
+    return <DateDivider>TODAY</DateDivider>
   }
 
   if (isItTheSameDay(yesterday, thisMessageDate)) {
-    return <Divider>Yesterday</Divider>
+    return <DateDivider>YESTERDAY</DateDivider>
   }
 
-  return <Divider>{formatDate(thisMessageDate)}</Divider>
+  return <DateDivider>{formatDate(thisMessageDate).toUpperCase()}</DateDivider>
 }

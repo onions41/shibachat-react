@@ -32,5 +32,5 @@ export default function formatDate(date) {
     suffix = "rd"
   }
 
-  return month + " " + day + suffix + ", " + year
+  return month + " " + day + suffix + " " + year
 }

@@ -15,10 +15,11 @@ export default function MessageCard({ message, me }) {
   const { textContent, createdAt, senderId } = message
 
   return (
-    <ListItem alignItems="flex-start">
+    <ListItem alignItems="flex-start" disableGutters={true} sx={{ pb: "8px", pt: "12px" }}>
       {/* TODO. Avatar */}
-      <ListItemAvatar>
+      <ListItemAvatar sx={{ "&.MuiListItemAvatar-root": { minWidth: 43 } }}>
         <Avatar
+          sx={{ width: 30, height: 30 }}
           alt="#"
           src="#"
         />
@@ -31,8 +32,9 @@ export default function MessageCard({ message, me }) {
             <Typography
               sx={{ display: "inline" }}
               component="span"
-              variant="body2"
-              color="text.primary"
+              variant="body1"
+              color="text.secondary"
+              fontWeight="bold"
             >
               {message.senderId === me.id
                 ? "Me"
@@ -43,9 +45,9 @@ export default function MessageCard({ message, me }) {
               sx={{ display: "inline" }}
               component="span"
               variant="body2"
-              color="text.primary"
+              color="text.tertiary"
             >
-              {` - ${millisecondsToTime(createdAt)}`}
+              {` \u2022 ${millisecondsToTime(createdAt)}`}
             </Typography>
           </>
         }
@@ -54,7 +56,7 @@ export default function MessageCard({ message, me }) {
           <Typography
             sx={{ display: "inline" }}
             component="span"
-            variant="body2"
+            variant="body1"
             color="text.primary"
           >
             {textContent}
