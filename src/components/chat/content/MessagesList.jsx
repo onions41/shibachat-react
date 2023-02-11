@@ -1,6 +1,8 @@
-import MessageCard from "./MessageCard"
-
 /* eslint-disable indent */
+// There is a bug in eslint where the rule that would allow it
+// to be competable with Prettier's ternery operator indenting,
+// which cannot be customized. Feb 2023. TODO: check eslint gh
+// for updates on the issue.
 
 // MUI
 import Container from "@mui/material/Container"
@@ -10,27 +12,19 @@ import Stack from "@mui/material/Stack"
 // Module imports
 import { useEffect, Fragment } from "react"
 import { useParams } from "react-router-dom"
-import { useLazyQuery, useApolloClient } from "@apollo/client"
-import { useSelector } from "react-redux"
-import find from "lodash/find"
+import { useLazyQuery } from "@apollo/client"
 
 // Internal imports
 import MESSAGES from "graphql/queries/Messages"
 import NEW_MESSAGE from "graphql/subscriptions/NewMessage"
-import ME from "graphql/queries/Me"
 import DisplayDate from "./DisplayDate"
-
-import { selectMeQueryDone } from "store/meSlice"
+import MessageCard from "./MessageCard"
 
 export default function Content({ me }) {
   // Hooks
   const { subjectId: subjectIdString } = useParams()
   // subjectId was a string, parsed into int. If string is undefined, returns NaN.
   const subjectId = parseInt(subjectIdString, 10)
-
-  const client = useApolloClient()
-
-  const meQueryDone = useSelector(selectMeQueryDone)
 
   const [fetchMessages, { called, loading, error, data, subscribeToMore }] =
     useLazyQuery(MESSAGES, {
@@ -82,7 +76,7 @@ export default function Content({ me }) {
     // TODO. Just show background in production.
     return (
       <div style={{ width: "100%" }}>
-        Query not called yet, probably because a friend was not selected. Ie,
+        Messages query not called yet, probably because a friend was not selected. Ie,
         params is blank.
       </div>
     )
@@ -116,14 +110,6 @@ export default function Content({ me }) {
 
   // data was fetched succesfully, and it actually contains results
 
-  let friend = {}
-  if (meQueryDone) {
-    const meQueryData = client.readQuery({ query: ME })
-    const friendObj = find(meQueryData.user.friends, (o) => o.id === subjectId)
-    if (friendObj) {
-      friend = friendObj
-    }
-  }
   return (
     /* Using stack as the component so I can reverse the order */
     // Wrapping the list in container seems to fix the divider error where the text is offset
@@ -140,7 +126,7 @@ export default function Content({ me }) {
           <Fragment key={`message-id-${message.id}`}>
             <MessageCard
               message={message}
-              friend={friend}
+              me={me}
             />
             <DisplayDate
               message={message}

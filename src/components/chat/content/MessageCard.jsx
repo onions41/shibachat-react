@@ -1,15 +1,17 @@
 /* eslint-disable indent */
+
 // MUI
 import ListItem from "@mui/material/ListItem"
 import ListItemText from "@mui/material/ListItemText"
 import Typography from "@mui/material/Typography"
 import ListItemAvatar from "@mui/material/ListItemAvatar"
 import Avatar from "@mui/material/Avatar"
+import find from "lodash/find"
 
 // Internal imports
 import millisecondsToTime from "utility/millisecondsToTime"
 
-export default function MessageCard({ message, friend }) {
+export default function MessageCard({ message, me }) {
   const { textContent, createdAt, senderId } = message
 
   return (
@@ -32,11 +34,10 @@ export default function MessageCard({ message, friend }) {
               variant="body2"
               color="text.primary"
             >
-              {friend.id && friend.id === senderId
-                ? friend.nickname // Displays the nickname of the friend if the id in params matches
-                : friend.id
-                ? "Me" // If it doesn't match
-                : "Loading" /* friend.id is not defined because meQuery hasn't loaded yet */}
+              {message.senderId === me.id
+                ? "Me"
+                // Find the friend object out of an array of friend objects and returns friend.nickname
+                : find(me.friends, (o) => o.id === senderId).nickname}
             </Typography>
             <Typography
               sx={{ display: "inline" }}
