@@ -1,11 +1,13 @@
 const palette = {
   primary: {
-    main: "#00C3FF", // parakeet blue
+    main: "#f9a523", // Shiba orange
     contrastText: "#FFFFFF"
   },
   secondary: {
-    main: "#5bd53c",
-    light: "#63e942"
+    main: "#4089fe", // Shiba book blue
+    light: "#9fc3ff",
+    dark: "#2d60d4",
+    outline: "#000072"
   },
   text: {
     primary: "#000000",
