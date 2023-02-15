@@ -35,6 +35,7 @@ export default function Router() {
   // End of Hooks
 
   // Do not use nested routes, this app is too simple to be using Outlets.
+  // Also, using Outlets is buggy, already tried.
   // https://reactrouter.com/en/main/start/concepts#outlets
   return (
     <BrowserRouter>
