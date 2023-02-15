@@ -26,7 +26,7 @@ const ChatRouteContainer = ({ children }) => (
 )
 
 const SidebarContainer = styled(Stack)(({ theme }) => ({
-  width: "27%",
+  width: "25%",
   height: "100%",
   backgroundColor: theme.palette.background.white,
   borderWidth: "1px 1px 0",
@@ -37,7 +37,7 @@ const SidebarContainer = styled(Stack)(({ theme }) => ({
 }))
 
 const ContentContainer = styled(Box)(({ theme }) => ({
-  width: "73%",
+  width: "75%",
   height: "100%",
   display: "flex",
   flexDirection: "column",
