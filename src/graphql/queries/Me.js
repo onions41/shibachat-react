@@ -8,7 +8,7 @@ import ReceivedFRequestFragment from "../fragments/ReceivedFRequestFragment"
 export default gql`
   ${SentFRequestFragment}
   ${ReceivedFRequestFragment}
-  
+
   query Me {
     user {
       id
@@ -26,6 +26,10 @@ export default gql`
       friends {
         id
         nickname
+        latestMessageWithMe {
+          createdAt
+          textContent
+        }
       }
     }
   }
