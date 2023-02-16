@@ -112,7 +112,7 @@ export default function InputBox() {
               <SendButton
                 variant="contained"
                 onClick={handleSubmit}
-                disabled={isSubmitting || !values.textContent}
+                disabled={isSubmitting || !values.textContent.trim()}
               >
                 SEND
               </SendButton>
