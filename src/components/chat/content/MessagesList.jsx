@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack"
 // Module imports
 import { useEffect, Fragment } from "react"
 import { useParams } from "react-router-dom"
-import { useLazyQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 
 // Internal imports
 import MESSAGES from "graphql/queries/Messages"
@@ -26,21 +26,13 @@ export default function Content({ me }) {
   // subjectId was a string, parsed into int. If string is undefined, returns NaN.
   const subjectId = parseInt(subjectIdStr, 10)
 
-  const [fetchMessages, { called, loading, error, data, subscribeToMore }] =
-    useLazyQuery(MESSAGES, {
-      fetchPolicy: "network-only"
-    })
-
-  // Calls the query each time the subjectId changes if subjectId exists
-  useEffect(() => {
-    if (subjectId) {
-      fetchMessages({
-        variables: {
-          friendId: subjectId
-        }
-      })
-    }
-  }, [subjectId])
+  const { loading, error, data, subscribeToMore } = useQuery(MESSAGES, {
+    variables: {
+      friendId: subjectId
+    },
+    skip: !subjectId, // Skip of subjectId is NaN
+    fetchPolicy: "network-only"
+  })
 
   // Unsubscribes then Subscribes each time data changes.
   // (data changes when data is successfully fetched)
@@ -72,12 +64,11 @@ export default function Content({ me }) {
 
   // End of hooks
 
-  if (!called) {
+  if (!subjectId) {
     // TODO. Just show background in production.
     return (
       <div style={{ width: "100%" }}>
-        Messages query not called yet, probably because a friend was not selected. Ie,
-        params is blank.
+        Nothing in params
       </div>
     )
   }
@@ -113,9 +104,7 @@ export default function Content({ me }) {
   return (
     /* Using stack as the component so I can reverse the order */
     // Wrapping the list in container seems to fix the divider error where the text is offset
-    <Container
-      maxWidth={false}
-    >
+    <Container maxWidth={false}>
       <List
         dense={false}
         component={Stack}
