@@ -17,18 +17,17 @@ import formatDateShort from "utility/formatDateShort"
 
 export default function SubjectCard({ subject }) {
   // Hooks
-  const { id: subjectId, nickname: subjectName, message } = subject
-  const { textContent, createdAt } = message
+  const { id: subjectId, nickname: subjectName, latestMessageWithMe } = subject
+  const { textContent, createdAt } = latestMessageWithMe
   const createdAtDateObj = new Date(parseInt(createdAt, 10))
 
+  // For underlining card text on mouse hover
   const nameTextRef = useRef(null)
   const dateTextRef = useRef(null)
-
   const handleMouseEnter = useCallback(() => {
     nameTextRef.current.setAttribute("style", "text-decoration: underline;")
     dateTextRef.current.setAttribute("style", "text-decoration: underline; color: rgb(45, 45, 45)")
   }, [])
-
   const handleMouseLeave = useCallback(() => {
     nameTextRef.current.removeAttribute("style")
     dateTextRef.current.removeAttribute("style")
@@ -40,7 +39,7 @@ export default function SubjectCard({ subject }) {
     <ListItem
       component={RouterLink}
       relative="path"
-      to={`../${subjectId}`}
+      to={`/chat/${subjectId}`}
       alignItems="flex-start"
       disableGutters={false}
       divider={true}
