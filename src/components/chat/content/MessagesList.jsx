@@ -22,9 +22,9 @@ import MessageCard from "./MessageCard"
 
 export default function Content({ me }) {
   // Hooks
-  const { subjectId: subjectIdString } = useParams()
+  const { subjectId: subjectIdStr } = useParams()
   // subjectId was a string, parsed into int. If string is undefined, returns NaN.
-  const subjectId = parseInt(subjectIdString, 10)
+  const subjectId = parseInt(subjectIdStr, 10)
 
   const [fetchMessages, { called, loading, error, data, subscribeToMore }] =
     useLazyQuery(MESSAGES, {
