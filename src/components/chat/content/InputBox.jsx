@@ -63,22 +63,23 @@ const SendButton = styled(Button)(({ theme }) => ({
 export default function InputBox() {
   // Hooks
   const { subjectId } = useParams()
+  const receiverId = parseInt(subjectId, 10)
 
   const [sendMessage, { reset: resetMutation }] = useMutation(SEND_MESSAGE)
 
   const onSubmit = useCallback((values, { resetForm, setSubmitting }) => {
-    values.textContent = values.textContent.trim()
-    sendMessage({ variables: values })
+    const textContent = values.textContent.trim()
+    sendMessage({ variables: { receiverId, textContent } })
     resetMutation()
     resetForm()
     setSubmitting(false)
-  }, [])
+  }, [receiverId])
 
   // End of Hooks
 
   return (
     <Formik
-      initialValues={{ textContent: "", receiverId: parseInt(subjectId, 10) }}
+      initialValues={{ textContent: "" }}
       // validationSchema={authInput}
       validateOnBlur={false}
       validateOnChange={false}
