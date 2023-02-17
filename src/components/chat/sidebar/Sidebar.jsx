@@ -1,16 +1,12 @@
-// MUI
-import Box from "@mui/material/Stack"
-import styled from "@mui/material/styles/styled"
-
 // Components
+import Header from "./Header"
 import SubjectsList from "./SubjectsList"
 
 export default function SideBar({ me /* User type */ }) {
-  if (me.friends.length) {
-    return <SubjectsList me={me} />
-  }
-
   return (
-    <div>You dont have any friends yet</div>
+    <>
+      <Header />
+      <SubjectsList me={me} />
+    </>
   )
 }
