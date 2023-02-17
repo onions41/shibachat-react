@@ -20,7 +20,7 @@ import NEW_MESSAGE from "graphql/subscriptions/NewMessage"
 import DisplayDate from "./DisplayDate"
 import MessageCard from "./MessageCard"
 
-export default function Content({ me }) {
+export default function MessagesList({ me }) {
   // Hooks
   const { subjectId: subjectIdStr } = useParams()
   // subjectId was a string, parsed into int. If string is undefined, returns NaN.
