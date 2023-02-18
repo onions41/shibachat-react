@@ -20,12 +20,8 @@ import NEW_MESSAGE from "graphql/subscriptions/NewMessage"
 import DisplayDate from "./DisplayDate"
 import MessageCard from "./MessageCard"
 
-export default function MessagesList({ me }) {
+export default function MessagesList({ me, subjectId }) {
   // Hooks
-  const { subjectId: subjectIdStr } = useParams()
-  // subjectId was a string, parsed into int. If string is undefined, returns NaN.
-  const subjectId = parseInt(subjectIdStr, 10)
-
   const { loading, error, data, subscribeToMore } = useQuery(MESSAGES, {
     variables: {
       friendId: subjectId

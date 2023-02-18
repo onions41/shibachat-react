@@ -6,7 +6,6 @@ import styled from "@mui/material/styles/styled"
 
 // Module imports
 import { useCallback } from "react"
-import { useParams } from "react-router-dom"
 import { Formik } from "formik"
 import { useMutation } from "@apollo/client"
 
@@ -60,11 +59,8 @@ const SendButton = styled(Button)(({ theme }) => ({
   }
 }))
 
-export default function InputBox() {
+export default function InputBox({ receiverId }) {
   // Hooks
-  const { subjectId } = useParams()
-  const receiverId = parseInt(subjectId, 10)
-
   const [sendMessage, { reset: resetMutation }] = useMutation(SEND_MESSAGE)
 
   const onSubmit = useCallback((values, { resetForm, setSubmitting }) => {
