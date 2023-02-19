@@ -7,10 +7,11 @@ import ListItemText from "@mui/material/ListItemText"
 import Typography from "@mui/material/Typography"
 import ListItemAvatar from "@mui/material/ListItemAvatar"
 import Avatar from "@mui/material/Avatar"
+import useTheme from "@mui/material/styles/useTheme"
 
 // Module imports
 import { useRef, useCallback } from "react"
-import { Link as RouterLink } from "react-router-dom"
+import { Link as RouterLink, useParams } from "react-router-dom"
 
 // Internal imports
 import formatDateShort from "utility/formatDateShort"
@@ -21,12 +22,18 @@ export default function SubjectCard({ subject }) {
   const { textContent, createdAt } = latestMessageWithMe
   const createdAtDateObj = new Date(parseInt(createdAt, 10))
 
+  const isSelected = subjectId === parseInt(useParams().subjectId, 10)
+  const { palette } = useTheme()
+
   // For underlining card text on mouse hover
   const nameTextRef = useRef(null)
   const dateTextRef = useRef(null)
   const handleMouseEnter = useCallback(() => {
     nameTextRef.current.setAttribute("style", "text-decoration: underline;")
-    dateTextRef.current.setAttribute("style", "text-decoration: underline; color: rgb(45, 45, 45)")
+    dateTextRef.current.setAttribute(
+      "style",
+      "text-decoration: underline; color: rgb(45, 45, 45)"
+    )
   }, [])
   const handleMouseLeave = useCallback(() => {
     nameTextRef.current.removeAttribute("style")
@@ -45,6 +52,10 @@ export default function SubjectCard({ subject }) {
       divider={true}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      sx={isSelected ? {
+        backgroundColor: "secondary.mainOl",
+        boxShadow: `${palette.secondary.main} 2px 0px 0px inset`
+      } : {}}
     >
       {/* TODO. Avatar */}
       <ListItemAvatar sx={{ "&.MuiListItemAvatar-root": { minWidth: 43 } }}>
@@ -56,9 +67,7 @@ export default function SubjectCard({ subject }) {
       </ListItemAvatar>
       <ListItemText
         primary={
-          <Box
-            sx={{ display: "flex", justifyContent: "space-between" }}
-          >
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             {/* Subject name */}
             <Typography
               ref={nameTextRef}

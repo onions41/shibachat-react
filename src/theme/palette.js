@@ -4,7 +4,8 @@ const palette = {
     contrastText: "#FFFFFF"
   },
   secondary: {
-    main: "#4089fe", // Shiba book blue
+    main: "rgb(64, 137, 254)", // Shiba book blue
+    mainOl: "rgba(64, 137, 254, 0.07)",
     light: "#9fc3ff",
     dark: "#2d60d4",
     outline: "#000072"
