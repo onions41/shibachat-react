@@ -1,6 +1,8 @@
 const palette = {
   primary: {
-    main: "#f9a523", // Shiba orange
+    main: "#fba42a", // Shiba orange
+    light: "#fff4e4",
+    dark: "#af6f43",
     contrastText: "#FFFFFF"
   },
   secondary: {
