@@ -10,7 +10,7 @@ export default function Header() {
         borderBottom: "1px rgba(0, 0, 0, 0.12) solid"
       }}
     >
-      <Typography variant="h1">Messages</Typography>
+      <Typography variant="h2">Messages</Typography>
     </Box>
   )
 }
