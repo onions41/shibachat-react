@@ -13,7 +13,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const toastSlice = createSlice({
   name: "toast",
   initialState: {
-    isOpen: true,
+    isOpen: false,
     atBottom: false,
     message: ""
   },

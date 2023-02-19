@@ -1,21 +1,15 @@
-// MUI
 import Box from "@mui/material/Box"
-import useTheme from "@mui/material/styles/useTheme"
-
-// Internal imports
 import Menu from "./menu/Menu"
 
 export default function Template({ children }) {
-  const { palette } = useTheme()
-
   return (
-    <Box sx={{ width: "100vw", height: "100vh", backgroundColor: palette.background.offWhite }}>
+    <Box sx={{ width: "100vw", height: "100vh", backgroundColor: "background.offWhite" }}>
       <Box
         sx={{
           height: "70px",
-          backgroundColor: palette.background.white,
+          backgroundColor: "background.white",
           borderBottomWidth: "1px",
-          borderBottomColor: palette.border.gray,
+          borderBottomColor: "border.gray",
           borderBottomStyle: "solid"
         }}
       >
