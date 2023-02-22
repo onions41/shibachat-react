@@ -10,9 +10,10 @@ import ME from "graphql/queries/Me"
 import Template from "components/router/template/Template"
 
 // Routes
-import Chat from "routes/Chat"
-import Login from "routes/Login"
-import Register from "routes/Register"
+import Chat from "./Chat"
+import Friends from "./Friends"
+import Login from "./Login"
+import Register from "./Register"
 
 // Components
 import Toast from "components/router/Toast"
@@ -100,6 +101,24 @@ export default function Router() {
               />
             )
           }
+        />
+        <Route
+          path="/friends"
+          element={isLoggedIn ? (
+            <Template>
+              <Friends
+                meCalled={called}
+                meLoading={loading}
+                meError={error}
+                me={data?.user}
+              />
+            </Template>
+          ) : (
+            <Navigate
+              to="/login"
+              replace
+            />
+          )}
         />
         <Route
           path="/login"
