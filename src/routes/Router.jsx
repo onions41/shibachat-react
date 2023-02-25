@@ -11,7 +11,7 @@ import Template from "components/router/template/Template"
 
 // Routes
 import Chat from "./Chat"
-import Friends from "./Friends"
+import Contacts from "./Contacts"
 import Login from "./Login"
 import Register from "./Register"
 
@@ -103,10 +103,10 @@ export default function Router() {
           }
         />
         <Route
-          path="/friends"
+          path="/contacts"
           element={isLoggedIn ? (
             <Template>
-              <Friends
+              <Contacts
                 meCalled={called}
                 meLoading={loading}
                 meError={error}
