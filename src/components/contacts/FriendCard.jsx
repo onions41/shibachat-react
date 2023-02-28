@@ -1,9 +1,15 @@
+// MUI
 import Box from "@mui/material/Box"
 import Avatar from "@mui/material/Avatar"
 import Typography from "@mui/material/Typography"
 import IconButton from "@mui/material/IconButton"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
 
+// Module
+import { useRef, useCallback } from "react"
+import { Link as RouterLink } from "react-router-dom"
+
+// Utilities
 import formatDateShort from "utility/formatDateShort"
 
 export default function FriendCard({ friend }) {
@@ -19,10 +25,25 @@ export default function FriendCard({ friend }) {
     }`
   }
 
+  // For underlining card text on mouse hover
+  const nameTextRef = useRef(null)
+  const handleMouseEnter = useCallback(() => {
+    nameTextRef.current.setAttribute("style", "text-decoration: underline;")
+  }, [])
+  const handleMouseLeave = useCallback(() => {
+    nameTextRef.current.removeAttribute("style")
+  }, [])
+
   return (
     // Out white box with rounded gray borders
     <Box
+      component={RouterLink}
+      to={`/chat/${friend.id}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       sx={{
+        color: "text.primary", // Gets rid of <a> decorations
+        textDecoration: "none", // Gets rid of <a> decorations
         height: "86px",
         margin: "8px 0",
         backgroundColor: "background.white",
@@ -32,7 +53,10 @@ export default function FriendCard({ friend }) {
         borderRadius: "8px",
         display: "grid",
         gridTemplateColumns: "66px 1fr 50px",
-        gridTemplateRows: "45% 55%"
+        gridTemplateRows: "45% 55%",
+        "&:hover": {
+          borderColor: "border.black"
+        }
       }}
     >
       {/* Avatar */}
@@ -50,7 +74,10 @@ export default function FriendCard({ friend }) {
       {/* Nickname of the friend */}
       <Typography
         noWrap
+        ref={nameTextRef}
         sx={{
+          color: "text.secondary",
+          lineHeight: 1.2,
           alignSelf: "end",
           fontWeight: "bold"
         }}
@@ -76,6 +103,7 @@ export default function FriendCard({ friend }) {
         sx={{
           maxHeight: "100%",
           paddingRight: "26px",
+          color: "text.secondary",
           fontSize: "0.85rem",
           fontStyle: "italic",
           alignSelf: "center",
