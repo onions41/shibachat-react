@@ -18,6 +18,7 @@ const palette = {
     tertiary: "rgb(89, 89, 89)"
   },
   border: {
+    black: "rgb(171, 168, 165)",
     gray: "#e4e2e0",
     contrastText: "#FFFFFF"
   },
