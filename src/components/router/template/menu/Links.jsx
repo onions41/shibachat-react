@@ -59,6 +59,7 @@ export default function Links() {
       <IconLinkBox>
         <PersonIcon fontSize="large" />
       </IconLinkBox>
+      {/* Account Link */}
       <Box
         sx={{
           height: "100%",
@@ -79,7 +80,7 @@ export default function Links() {
         </Avatar>
         <ArrowDropDownIcon
           ref={downArrowRef}
-          sx={{ position: "relative", top: "1px", fontSize: "1.8rem" }}
+          sx={{ color: "rgb(89, 89, 89)", position: "relative", top: "1px", fontSize: "1.8rem" }}
         />
       </Box>
     </Stack>
