@@ -5,20 +5,12 @@ export default function Logo() {
   return (
     <Stack
       direction="row"
-      spacing={1}
+      spacing={0}
       alignItems="end"
     >
       <img
         src="/inu_logo.png"
-        width="44px"
-      />
-      <img
-        src="/inu_logo.png"
-        width="44px"
-      />
-      <img
-        src="/inu_logo.png"
-        width="44px"
+        width="48px"
       />
       <Typography variant="h1">A place for inus to chat</Typography>
     </Stack>
