@@ -3,7 +3,12 @@ import Stack from "@mui/material/Stack"
 
 export default function Title() {
   return (
-    <Stack>
+    <Stack
+      onClick={() => {
+        window.location.href = "/"
+      }}
+      sx={{ cursor: "pointer" }}
+    >
       {/* SHIBACHAT with shiny effect */}
       <Typography
         component="h1"
