@@ -7,12 +7,44 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble"
 import PersonIcon from "@mui/icons-material/Person"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import { useRef, useCallback } from "react"
+import { Link as RouterLink, useLocation } from "react-router-dom"
 
-function IconLinkBox({ children }) {
+// Put the icons in this box to highlight the icons
+// and bottom border on mouse hover
+function IconLinkBox({ path, children }) {
   const { palette } = useTheme()
+  const { pathname } = useLocation() // e.g. /chat/whatever
+
+  let condCSSProps = {}
+  const currentPath = {
+    boxShadow: `${palette.primary.main} 0px -2px 0px inset`
+  }
+  const notCurrentPath = {
+    "&:hover": {
+      color: "primary.main",
+      boxShadow: `${palette.primary.main} 0px -2px 0px inset`
+    }
+  }
+  if (pathname === "/") {
+    if (path === "/chat") {
+      condCSSProps = currentPath
+    } else {
+      condCSSProps = notCurrentPath
+    }
+  } else {
+    if (RegExp(`^${path}`).test(pathname)) {
+      condCSSProps = currentPath
+    } else {
+      condCSSProps = notCurrentPath
+    }
+  }
+
+  console.log(condCSSProps)
 
   return (
     <Box
+      component={RouterLink}
+      to={path}
       sx={{
         color: "text.tertiary",
         fontSize: "1.7rem",
@@ -21,10 +53,8 @@ function IconLinkBox({ children }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        "&:hover": {
-          color: "primary.main",
-          boxShadow: `${palette.primary.main} 0px -3px 0px inset`
-        }
+        // Conditional for what path its on currently
+        ...condCSSProps
       }}
     >
       {children}
@@ -32,10 +62,11 @@ function IconLinkBox({ children }) {
   )
 }
 
+// The icon links and avatar menu on the right side of the menu
 export default function Links() {
   const { palette } = useTheme()
 
-  // For underlining card text on mouse hover
+  // For highlighting the avatar menu down arrow on mouse hover
   const downArrowRef = useRef(null)
   const handleMouseEnter = useCallback(() => {
     downArrowRef.current.setAttribute(
@@ -52,21 +83,24 @@ export default function Links() {
       direction="row"
       alignItems="center"
       height="100%"
+      spacing={1}
     >
-      <IconLinkBox>
+      {/* Chat and Contacts links */}
+      <IconLinkBox path="/chat">
         <ChatBubbleIcon fontSize="inherit" />
       </IconLinkBox>
-      <IconLinkBox>
+      <IconLinkBox path="/contacts">
         <PersonIcon fontSize="large" />
       </IconLinkBox>
-      {/* Account Link */}
+
+      {/* Avatar menu */}
       <Box
         sx={{
           height: "100%",
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          ml: 3
+          pl: 3
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -80,7 +114,12 @@ export default function Links() {
         </Avatar>
         <ArrowDropDownIcon
           ref={downArrowRef}
-          sx={{ color: "rgb(89, 89, 89)", position: "relative", top: "1px", fontSize: "1.8rem" }}
+          sx={{
+            color: "text.tertiary",
+            position: "relative",
+            top: "1px",
+            fontSize: "1.8rem"
+          }}
         />
       </Box>
     </Stack>
