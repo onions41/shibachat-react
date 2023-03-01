@@ -1,7 +1,7 @@
-// MUI
 import Container from "@mui/material/Container"
 
 import Logo from "./Logo"
+import Title from "./Title"
 import Links from "./Links"
 
 export default function Menu() {
@@ -18,6 +18,7 @@ export default function Menu() {
       }}
     >
       <Logo />
+      <Title />
       <Links />
     </Container>
   )

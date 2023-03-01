@@ -12,7 +12,14 @@ export default function Logo() {
         src="/inu_logo.png"
         width="48px"
       />
-      <Typography variant="h1">A place for inus to chat</Typography>
+      <img
+        src="/inu_logo.png"
+        width="40px"
+      />
+      <img
+        src="/inu_logo.png"
+        width="32px"
+      />
     </Stack>
   )
 }
