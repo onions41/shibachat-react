@@ -1,13 +1,13 @@
 const palette = {
   primary: {
-    main: "#fba42a", // Shiba orange
-    light: "#fff4e4",
-    dark: "#af6f43",
+    main: "#f0b33d", // Shiba orange
+    light: "#fff4e4", // Menu topbar backgound
+    dark: "#c37631",
     contrastText: "#FFFFFF"
   },
   secondary: {
     main: "rgb(64, 137, 254)", // Shiba book blue
-    mainOl: "rgba(64, 137, 254, 0.07)",
+    mainOl: "rgba(64, 137, 254, 0.07)", // (Overlay)
     light: "#9fc3ff",
     dark: "#2d60d4",
     outline: "#000072"
