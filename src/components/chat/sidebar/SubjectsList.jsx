@@ -11,9 +11,9 @@ export default function SubjectsList({ me }) {
     (friend) => friend.latestMessageWithMe
   )
   const messageFriendsDesc = messagedFriends.sort(
-    (later, earlier) =>
-      parseInt(later.latestMessageWithMe.createdAt, 10) -
-      parseInt(earlier.latestMessageWithMe.createdAt, 10)
+    (a, b) =>
+      parseInt(b.latestMessageWithMe.createdAt, 10) -
+      parseInt(a.latestMessageWithMe.createdAt, 10)
   )
 
   return (
