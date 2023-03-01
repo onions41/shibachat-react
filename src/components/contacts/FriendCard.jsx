@@ -35,7 +35,7 @@ export default function FriendCard({ friend }) {
   }, [])
 
   return (
-    // Out white box with rounded gray borders
+    // Outer white box with rounded gray borders
     <Box
       component={RouterLink}
       to={`/chat/${friend.id}`}
