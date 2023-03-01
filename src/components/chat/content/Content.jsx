@@ -22,7 +22,7 @@ export default function Content({ me }) {
       <Box
         sx={{
           // height: "calc(100% - 72px)", // compensating for the border of the ContentContainer in Chat
-          overflow: "scroll",
+          overflowY: "scroll",
           flexGrow: 1,
           flexShrink: 1,
           display: "flex",
