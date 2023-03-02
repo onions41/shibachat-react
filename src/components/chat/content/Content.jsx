@@ -66,7 +66,7 @@ export default function Content({ me }) {
           <Typography
             sx={{
               textAlign: "center",
-              color: "rgba(183, 176, 164, 0.6)",
+              color: "rgba(183, 176, 164, 0.4)",
               fontSize: "100px",
               fontFamily: "'Windsurf', sans-serif;"
             }}
