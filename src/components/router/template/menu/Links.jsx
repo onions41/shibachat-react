@@ -15,31 +15,25 @@ function IconLinkBox({ path, children }) {
   const { palette } = useTheme()
   const { pathname } = useLocation() // e.g. /chat/whatever
 
-  let condCSSProps = {}
-  const currentPath = {
-    boxShadow: `${palette.primary.main} 0px -2px 0px inset`
-  }
-  const notCurrentPath = {
-    "&:hover": {
-      color: "primary.main",
-      boxShadow: `${palette.primary.main} 0px -2px 0px inset`
-    }
-  }
-  if (pathname === "/") {
-    if (path === "/chat") {
-      condCSSProps = currentPath
-    } else {
-      condCSSProps = notCurrentPath
-    }
-  } else {
-    if (RegExp(`^${path}`).test(pathname)) {
-      condCSSProps = currentPath
-    } else {
-      condCSSProps = notCurrentPath
-    }
-  }
+  const Cp = () => (
+    <Box
+      sx={{
+        color: "text.tertiary",
+        fontSize: "1.7rem",
+        width: "52px",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        // because this is the currently selected path
+        boxShadow: `${palette.primary.main} 0px -2px 0px inset`
+      }}
+    >
+      {children}
+    </Box>
+  )
 
-  return (
+  const Np = () => (
     <Box
       component={RouterLink}
       to={path}
@@ -51,13 +45,30 @@ function IconLinkBox({ path, children }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        // Conditional for what path its on currently
-        ...condCSSProps
+        // the rest of the paths
+        "&:hover": {
+          color: "primary.main",
+          boxShadow: `${palette.primary.main} 0px -2px 0px inset`
+        }
       }}
     >
       {children}
     </Box>
   )
+
+  if (pathname === "/") {
+    if (path === "/chat") {
+      return <Cp />
+    } else {
+      return <Np />
+    }
+  } else {
+    if (RegExp(`^${path}`).test(pathname)) {
+      return <Cp />
+    } else {
+      return <Np />
+    }
+  }
 }
 
 // The icon links and avatar menu on the right side of the menu
