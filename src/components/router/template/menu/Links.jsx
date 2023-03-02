@@ -39,8 +39,6 @@ function IconLinkBox({ path, children }) {
     }
   }
 
-  console.log(condCSSProps)
-
   return (
     <Box
       component={RouterLink}

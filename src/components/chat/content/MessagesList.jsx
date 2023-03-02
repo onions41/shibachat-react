@@ -60,15 +60,6 @@ export default function MessagesList({ me, subjectId }) {
 
   // End of hooks
 
-  if (!subjectId) {
-    // TODO. Just show background in production.
-    return (
-      <div style={{ width: "100%" }}>
-        Nothing in params
-      </div>
-    )
-  }
-
   if (loading) {
     // TODO. Show loading animation.
     return <div style={{ width: "100%" }}>Loading the Messages query</div>
