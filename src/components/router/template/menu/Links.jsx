@@ -15,7 +15,7 @@ function IconLinkBox({ path, children }) {
   const { palette } = useTheme()
   const { pathname } = useLocation() // e.g. /chat/whatever
 
-  const Cp = () => (
+  const Cp = () => ( // Currently selected link
     <Box
       sx={{
         color: "text.tertiary",

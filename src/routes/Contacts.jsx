@@ -63,6 +63,7 @@ export default function Contacts({ meCalled, meLoading, meError, me }) {
         {me.receivedFRequests.length ? (
           <>
             <Typography
+              color="text.secondary"
               variant="h3"
               mt={2}
             >
@@ -72,6 +73,7 @@ export default function Contacts({ meCalled, meLoading, meError, me }) {
           </>
         ) : null}
         <Typography
+          color="text.secondary"
           variant="h3"
           mt={2}
         >
