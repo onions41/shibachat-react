@@ -57,7 +57,7 @@ export default function Contacts({ meCalled, meLoading, meError, me }) {
   return (
     <FriendsRouteContainer>
       <TopBarContainer>
-        <TopBar />
+        <TopBar me={me} />
       </TopBarContainer>
       <FriendCardsScrollBox>
         {me.receivedFRequests.length ? (

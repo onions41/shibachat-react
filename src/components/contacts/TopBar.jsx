@@ -6,12 +6,13 @@ import TextField from "@mui/material/TextField"
 import IconButton from "@mui/material/IconButton"
 import Typography from "@mui/material/Typography"
 import InputAdornment from "@mui/material/InputAdornment"
+import { useState } from "react"
+import FReqModal from "./FReqModal/FReqModal"
 
 const iconFormat = {
   color: "text.secondary",
   padding: "8px",
   fontSize: "23px",
-  backgroundColor: "border.gray",
   borderWidth: "1px",
   borderStyle: "solid",
   borderColor: "border.gray",
@@ -38,7 +39,9 @@ const cateFormat = {
   }
 }
 
-export default function TopBar() {
+export default function TopBar({ me }) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <Box
       sx={{
@@ -53,12 +56,8 @@ export default function TopBar() {
         direction="row"
         spacing={1}
       >
-        <Typography sx={cateFormat}>
-          Friends
-        </Typography>
-        <Typography sx={cateFormat}>
-          Groups
-        </Typography>
+        <Typography sx={cateFormat}>Friends</Typography>
+        <Typography sx={cateFormat}>Groups</Typography>
       </Stack>
       <Stack
         direction="row"
@@ -80,7 +79,8 @@ export default function TopBar() {
               </InputAdornment>
             )
           }}
-          sx={{ // fieldset is the element that defines the border
+          sx={{
+            // fieldset is the element that defines the border
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 // Mouse not over
@@ -98,8 +98,19 @@ export default function TopBar() {
             }
           }}
         />
-        <PersonAddIcon sx={iconFormat} />
+        <PersonAddIcon
+          onClick={() => setIsModalOpen(true)}
+          sx={{
+            ...iconFormat,
+            backgroundColor: isModalOpen ? "secondary.light" : "border.gray"
+          }}
+        />
       </Stack>
+      <FReqModal
+        isOpen={isModalOpen}
+        handleClose={() => setIsModalOpen(false)}
+        me={me}
+      />
     </Box>
   )
 }

@@ -10,7 +10,7 @@ import SendFReqList from "./SendFReqList"
 
 const ModalContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
-  border: `4px ${theme.palette.primary.main} solid`,
+  border: `3px ${theme.palette.secondary.main} solid`,
   borderRadius: 10,
   width: 500,
   height: "80%",
