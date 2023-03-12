@@ -7,7 +7,7 @@ import styled from "@mui/material/styles/styled"
 // Components
 import TopBar from "components/contacts/TopBar"
 import ContactCardsGrid from "components/contacts/ContactCardsGrid"
-import ReceivedFReqCarousel from "components/contacts/ReceivedFReqCarousel"
+import ReceivedFReqCarousel from "components/contacts/receivedFReqCarousel/ReceivedFReqCarousel"
 
 const FriendsRouteContainer = ({ children }) => (
   <Container
