@@ -2,8 +2,6 @@
 import Box from "@mui/material/Box"
 import Avatar from "@mui/material/Avatar"
 import Typography from "@mui/material/Typography"
-import IconButton from "@mui/material/IconButton"
-import MoreVertIcon from "@mui/icons-material/MoreVert"
 
 // Module
 import { useRef, useCallback } from "react"
@@ -11,8 +9,9 @@ import { Link as RouterLink } from "react-router-dom"
 
 // Utilities
 import formatDateShort from "utility/formatDateShort"
+import MenuBtn from "./MenuBtn"
 
-export default function FriendCard({ friend }) {
+export default function FriendCard({ friend, unfriend }) {
   // Grabs the lastest message between me and friend
   // If there was no message yet, the default string in the line below
   let msgStr = "Send this inu a message"
@@ -85,19 +84,10 @@ export default function FriendCard({ friend }) {
         {friend.nickname}
       </Typography>
       {/* More button */}
-      <IconButton
-        aria-label="open menu"
-        sx={{
-          width: "37.8px",
-          height: "37.8px",
-          justifySelf: "center",
-          position: "relative",
-          top: "4px",
-          left: "2px"
-        }}
-      >
-        <MoreVertIcon />
-      </IconButton>
+      <MenuBtn
+        friend={friend}
+        unfriend={unfriend}
+      />
       {/* Truncated last message */}
       <Typography
         sx={{
