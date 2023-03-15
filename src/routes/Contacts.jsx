@@ -1,40 +1,12 @@
 // MUI
 import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
-import Typography from "@mui/material/Typography"
-import styled from "@mui/material/styles/styled"
 
 import { useState } from "react"
 
 // Components
-import TopBar from "components/contacts/TopBar"
-import ContactCardsGrid from "components/contacts/ContactCardsGrid"
-import ReceivedFReqCarousel from "components/contacts/receivedFReqCarousel/ReceivedFReqCarousel"
-
-const FriendsRouteContainer = ({ children }) => (
-  <Container
-    maxWidth="md"
-    disableGutters={true}
-    sx={{ height: "100%", pt: 2 }}
-  >
-    {children}
-  </Container>
-)
-
-const TopBarContainer = styled(Box)(({ theme }) => ({
-  width: "100%",
-  height: "55px",
-  borderWidth: "0 0 1px",
-  borderStyle: "solid",
-  borderColor: theme.palette.border.gray
-}))
-
-const FriendCardsScrollBox = styled(Box)(() => ({
-  width: "98%",
-  height: "calc(100% - 65px)",
-  margin: "0 auto",
-  overflow: "scroll"
-}))
+import TopBar from "components/contacts/topBar/TopBar"
+import FriendsPage from "components/contacts/friendsPage/FriendsPage"
 
 export default function Contacts({ meCalled, meLoading, meError, me }) {
   // Hooks
@@ -62,32 +34,38 @@ export default function Contacts({ meCalled, meLoading, meError, me }) {
   // data was fetched successfully
 
   return (
-    <FriendsRouteContainer>
-      <TopBarContainer>
-        <TopBar me={me} />
-      </TopBarContainer>
-      <FriendCardsScrollBox>
-        {me.receivedFRequests.length ? (
-          <>
-            <Typography
-              color="text.secondary"
-              variant="h3"
-              mt={2}
-            >
-              Friend Requests
-            </Typography>
-            <ReceivedFReqCarousel me={me} />
-          </>
-        ) : null}
-        <Typography
-          color="text.secondary"
-          variant="h3"
-          mt={2}
-        >
-          Friends
-        </Typography>
-        {me.friends.length ? <ContactCardsGrid me={me} /> : "You don't have any friends yet."}
-      </FriendCardsScrollBox>
-    </FriendsRouteContainer>
+    <Container
+      maxWidth="md"
+      disableGutters={true}
+      sx={{ height: "100%", pt: 2 }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          height: "55px",
+          borderWidth: "0 0 1px",
+          borderStyle: "solid",
+          borderColor: "border.gray"
+        }}
+      >
+        {/* The sub-menu bar of the contacts route */}
+        <TopBar
+          me={me}
+          page={page}
+          setPage={setPage}
+        />
+      </Box>
+      <Box
+        sx={{
+          width: "98%",
+          height: "calc(100% - 65px)",
+          margin: "0 auto",
+          overflow: "scroll"
+        }}
+      >
+        {/* The content shown depending what page is selected in the sub-menu */}
+        <FriendsPage me={me} />
+      </Box>
+    </Container>
   )
 }

@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton"
 import Typography from "@mui/material/Typography"
 import InputAdornment from "@mui/material/InputAdornment"
 import { useState } from "react"
-import FReqModal from "./FReqModal/FReqModal"
+import FReqModal from "./fReqModal/FReqModal"
 
 const iconFormat = {
   color: "text.secondary",
