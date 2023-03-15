@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography"
-import ContactCardsGrid from "components/contacts/ContactCardsGrid"
-import ReceivedFReqCarousel from "components/contacts/receivedFReqCarousel/ReceivedFReqCarousel"
+import ContactCardsGrid from "components/contacts/friendsPage/ContactCardsGrid"
+import ReceivedFReqCarousel from "components/contacts/friendsPage/receivedFReqCarousel/ReceivedFReqCarousel"
 
 export default function FriendsPage({ me }) {
   return (

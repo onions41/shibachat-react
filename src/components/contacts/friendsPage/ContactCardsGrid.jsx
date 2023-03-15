@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box"
-import FriendCard from "./friendCard/FriendCard"
+import FriendCard from "../friendCard/FriendCard"
 
 import { useMutation } from "@apollo/client"
 import UNFRIEND from "graphql/mutations/Unfriend"
