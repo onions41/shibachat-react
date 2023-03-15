@@ -4,6 +4,8 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import styled from "@mui/material/styles/styled"
 
+import { useState } from "react"
+
 // Components
 import TopBar from "components/contacts/TopBar"
 import ContactCardsGrid from "components/contacts/ContactCardsGrid"
@@ -35,6 +37,11 @@ const FriendCardsScrollBox = styled(Box)(() => ({
 }))
 
 export default function Contacts({ meCalled, meLoading, meError, me }) {
+  // Hooks
+  const [page, setPage] = useState("friends")
+
+  // End of Hooks
+
   if (!meCalled) {
     return null
   }

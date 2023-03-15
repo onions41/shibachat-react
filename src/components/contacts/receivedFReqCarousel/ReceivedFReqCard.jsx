@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography"
 export default function ReceivedFReqCard({
   fReq,
   acceptFRequest,
-  rejectFRequest
+  blockFRequest
 }) {
   return (
     <Box
@@ -73,7 +73,7 @@ export default function ReceivedFReqCard({
           variant="outlined"
           size="small"
           onClick={() =>
-            rejectFRequest({
+            blockFRequest({
               variables: {
                 senderId: fReq.senderId
               }

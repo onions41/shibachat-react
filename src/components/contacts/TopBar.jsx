@@ -39,7 +39,7 @@ const cateFormat = {
   }
 }
 
-export default function TopBar({ me }) {
+export default function TopBar({ me, page, setPage }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
@@ -56,8 +56,20 @@ export default function TopBar({ me }) {
         direction="row"
         spacing={1}
       >
-        <Typography sx={cateFormat}>Friends</Typography>
-        <Typography sx={cateFormat}>Groups</Typography>
+        <Typography
+          id="friends"
+          onClick={(e) => setPage(e.target.id)}
+          sx={cateFormat}
+        >
+          Friends
+        </Typography>
+        <Typography
+          id="blocked"
+          onClick={(e) => setPage(e.target.id)}
+          sx={cateFormat}
+        >
+          Blocked
+        </Typography>
       </Stack>
       <Stack
         direction="row"
