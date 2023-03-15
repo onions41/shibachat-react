@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box"
-import FriendCard from "../friendCard/FriendCard"
+import FriendCard from "./friendCard/FriendCard"
 
 import { useMutation } from "@apollo/client"
 import UNFRIEND from "graphql/mutations/Unfriend"
 
-export default function ContactCardsGrid({ me }) {
+export default function FriendCardsGrid({ me }) {
   // Unfriend mutation
   const [unfriend] = useMutation(UNFRIEND, {
     update(cache, { data }) {

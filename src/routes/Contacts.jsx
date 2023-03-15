@@ -64,7 +64,13 @@ export default function Contacts({ meCalled, meLoading, meError, me }) {
         }}
       >
         {/* The content shown depending what page is selected in the sub-menu */}
-        <FriendsPage me={me} />
+        {page === "friends" ? (
+          <FriendsPage me={me} />
+        ) : page === "blocked" ? (
+          page
+        ) : (
+          "bahh"
+        )}
       </Box>
     </Container>
   )

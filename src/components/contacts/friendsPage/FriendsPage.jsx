@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography"
-import ContactCardsGrid from "components/contacts/friendsPage/ContactCardsGrid"
+import FriendCardsGrid from "components/contacts/friendsPage/friendCardsGrid/FriendCardsGrid"
 import ReceivedFReqCarousel from "components/contacts/friendsPage/receivedFReqCarousel/ReceivedFReqCarousel"
 
 export default function FriendsPage({ me }) {
@@ -25,7 +25,7 @@ export default function FriendsPage({ me }) {
         Friends
       </Typography>
       {me.friends.length ? (
-        <ContactCardsGrid me={me} />
+        <FriendCardsGrid me={me} />
       ) : (
         "You don't have any friends yet."
       )}
