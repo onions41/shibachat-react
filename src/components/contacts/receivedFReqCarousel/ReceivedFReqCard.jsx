@@ -4,7 +4,11 @@ import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 
-export default function ReceivedFReqCard({ fReq, acceptFRequest }) {
+export default function ReceivedFReqCard({
+  fReq,
+  acceptFRequest,
+  rejectFRequest
+}) {
   return (
     <Box
       sx={{
@@ -68,6 +72,13 @@ export default function ReceivedFReqCard({ fReq, acceptFRequest }) {
         <Button
           variant="outlined"
           size="small"
+          onClick={() =>
+            rejectFRequest({
+              variables: {
+                senderId: fReq.senderId
+              }
+            })
+          }
           sx={{
             fontSize: "13px",
             textTransform: "none",
