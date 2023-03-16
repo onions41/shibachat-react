@@ -36,10 +36,10 @@ const addIconBtnStyle = (page, isModalOpen) => {
     fontSize: "23px",
     borderWidth: "1px",
     borderStyle: "solid",
-    borderColor: "grey.300",
+    borderColor: "background.disabled",
     borderRadius: "100px",
     boxSizing: "content-box",
-    backgroundColor: "grey.300"
+    backgroundColor: "background.disabled"
   }
 }
 

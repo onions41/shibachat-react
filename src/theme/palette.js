@@ -25,6 +25,7 @@ const palette = {
   },
   background: {
     offWhite: "#f6f6f6",
+    disabled: "#e8e8e8",
     white: "#ffffff"
   }
 }
