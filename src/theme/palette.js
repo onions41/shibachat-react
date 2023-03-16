@@ -10,7 +10,8 @@ const palette = {
     mainOl: "rgba(64, 137, 254, 0.07)", // (Overlay)
     light: "#9fc3ff",
     dark: "#2d60d4",
-    outline: "#000072"
+    outline: "#000072",
+    contrastText: "#FFFFFF"
   },
   text: {
     primary: "#000000",
