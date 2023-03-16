@@ -9,17 +9,37 @@ import InputAdornment from "@mui/material/InputAdornment"
 import { useState } from "react"
 import FReqModal from "./fReqModal/FReqModal"
 
-const iconBtnStyle = {
-  color: "text.secondary",
-  padding: "8px",
-  fontSize: "23px",
-  borderWidth: "1px",
-  borderStyle: "solid",
-  borderColor: "border.gray",
-  borderRadius: "100px",
-  boxSizing: "content-box",
-  "&:hover": {
-    borderColor: "border.black"
+// Conditional styling for the icon button used for adding friends or other things
+const addIconBtnStyle = (page, isModalOpen) => {
+  if (page === "friends") {
+    // Abled
+    return {
+      color: "text.secondary",
+      padding: "8px",
+      fontSize: "23px",
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderColor: "border.gray",
+      borderRadius: "100px",
+      boxSizing: "content-box",
+      backgroundColor: isModalOpen ? "secondary.light" : "border.gray",
+      "&:hover": {
+        borderColor: "border.black",
+        cursor: "pointer"
+      }
+    }
+  }
+  // Disabled
+  return {
+    color: "background.offWhite",
+    padding: "8px",
+    fontSize: "23px",
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: "grey.300",
+    borderRadius: "100px",
+    boxSizing: "content-box",
+    backgroundColor: "grey.300"
   }
 }
 
@@ -130,11 +150,8 @@ export default function TopBar({ me, page, setPage }) {
         />
         {/* Icon buttons */}
         <PersonAddIcon
-          onClick={() => setIsModalOpen(true)}
-          sx={{
-            ...iconBtnStyle,
-            backgroundColor: isModalOpen ? "secondary.light" : "border.gray"
-          }}
+          onClick={() => (page === "friends" ? setIsModalOpen(true) : null)}
+          sx={addIconBtnStyle(page, isModalOpen)}
         />
       </Stack>
       {/* Modal that deals with sending and managing friend requests */}
