@@ -8,7 +8,7 @@ const palette = {
   secondary: {
     main: "rgb(64, 137, 254)", // Shiba book blue
     mainOl: "rgba(64, 137, 254, 0.07)", // (Overlay)
-    light: "#9fc3ff",
+    light: "rgba(159, 195, 255, 0.6)",
     dark: "#2d60d4",
     outline: "#000072",
     contrastText: "#FFFFFF"
