@@ -16,7 +16,7 @@ export default function SentFReqList({ me }) {
         // Modifies the receivedFReqFromMe field of the cached user object to false
         cache.modify({
           // Uses mutation response data to id the user object to modify
-          id: cache.identify(data.cancelFRequest.friend),
+          id: cache.identify(data.cancelFRequest.receiver),
           fields: {
             receivedFReqFromMe: () => false
           }
