@@ -10,15 +10,18 @@ export default function ReceivedFReqCarousel({ me }) {
 
   return (
     <Box sx={{ padding: "8px", display: "flex", flexDirection: "row" }}>
-      {me.receivedFRequests.map((fReq) => (
-        <ReceivedFReqCard
-          fReq={fReq}
-          acceptFRequest={acceptFRequest}
-          blockFRequest={blockFRequest}
-          // cancelFReqLoading={cancelFReqLoading}
-          key={`senderId-${fReq.senderId}`}
-        />
-      ))}
+      {me.receivedFRequests.map(
+        (fReq) =>
+          fReq.status === "PENDING" && (
+            <ReceivedFReqCard
+              fReq={fReq}
+              acceptFRequest={acceptFRequest}
+              blockFRequest={blockFRequest}
+              // cancelFReqLoading={cancelFReqLoading}
+              key={`senderId-${fReq.senderId}`}
+            />
+          )
+      )}
     </Box>
   )
 }

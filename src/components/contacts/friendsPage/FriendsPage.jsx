@@ -5,7 +5,7 @@ import ReceivedFReqCarousel from "components/contacts/friendsPage/receivedFReqCa
 export default function FriendsPage({ me }) {
   return (
     <>
-      {me.receivedFRequests.length ? (
+      {me.receivedFRequests.some((fReq) => fReq.status === "PENDING") ? (
         <>
           <Typography
             color="text.secondary"
