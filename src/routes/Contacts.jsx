@@ -7,6 +7,7 @@ import { useState } from "react"
 // Components
 import TopBar from "components/contacts/topBar/TopBar"
 import FriendsPage from "components/contacts/friendsPage/FriendsPage"
+import BlockedPage from "components/contacts/blockedPage/BlockedPage"
 
 export default function Contacts({ meCalled, meLoading, meError, me }) {
   // Hooks
@@ -67,9 +68,9 @@ export default function Contacts({ meCalled, meLoading, meError, me }) {
         {page === "friends" ? (
           <FriendsPage me={me} />
         ) : page === "blocked" ? (
-          page
+          <BlockedPage me={me} />
         ) : (
-          "bahh"
+          "No page selected"
         )}
       </Box>
     </Container>
