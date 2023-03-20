@@ -2,7 +2,7 @@ import Container from "@mui/material/Container"
 
 import Logo from "./Logo"
 import Title from "./Title"
-import Links from "./Links"
+import Links from "./links/Links"
 
 export default function Menu() {
   return (
