@@ -1,36 +1,52 @@
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
+import Avatar from "@mui/material/Avatar"
 import Typography from "@mui/material/Typography"
 
-export default function BlockedFReqCard({ fReq }) {
+export default function BlockedFReqCard({ fReq, unblockFRequest }) {
   return (
     <Box
       sx={{
-        height: "150px",
-        margin: "6px 0",
-        border: "2px plum dotted",
-        borderRadius: "8px",
-        // backgroundColor: "lightgreen"
+        paddingBottom: "10px",
+        margin: "5px 0",
+        backgroundColor: "background.white",
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderColor: "border.gray",
+        borderRadius: "32px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center"
       }}
     >
+      <Avatar
+        sx={{
+          width: 37,
+          height: 37,
+          margin: "19px auto 12px",
+          gridRow: "span 2",
+          justifySelf: "center"
+        }}
+        alt="#"
+        src="#"
+      />
       <Typography
         sx={{ textAlign: "center", marginBottom: "12px", fontSize: "0.9rem" }}
       >
-        Marge Davisson
+        {fReq.sender.nickname}
       </Typography>
+
+      {/* Unblock Button (fRequest) */}
       <Button
         variant="outlined"
         size="small"
-        // onClick={() =>
-        //   blockFRequest({
-        //     variables: {
-        //       senderId: fReq.senderId
-        //     }
-        //   })
-        // }
+        onClick={() =>
+          unblockFRequest({
+            variables: {
+              senderId: fReq.senderId
+            }
+          })
+        }
         sx={{
           fontSize: "13px",
           textTransform: "none",
